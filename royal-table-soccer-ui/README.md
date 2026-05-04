@@ -1,8 +1,15 @@
-# Royal Table Soccer — Modern UI (Stadium Night)
+# Royal Table Soccer — Modern UI
 
 Redesign of three game scenes for **Unity 6** using **UI Toolkit** (UXML + USS + C#).
 Resolution base: **1920x1080 landscape** (Android / iOS).
-Visual direction: **Stadium Night** matching the main menu (royal blue cards, neon purple/cyan/magenta glow, Lilita One typography, stadium background).
+Two visual directions are provided so you can A/B compare:
+
+| Option | Style | Folder | Browser preview |
+|--------|-------|--------|-----------------|
+| **1** | **Stadium Night** — royal blue cards, neon purple/cyan/magenta glow, rounded pills | `royal-table-soccer-ui/` (root) | `preview.html` |
+| **2** | **FUT Premium** — black + gold + crimson, angular FUT-style trading cards, dense info | `royal-table-soccer-ui/opcao2/` | `preview-opcao2.html` |
+
+Both use **Lilita One** as the only font, both target the same `1920x1080` reference resolution, and both controllers expose the same public API (`SetTeams`, `SetData`, `ShowOpponent`, etc.) so you can swap between options without touching your data layer.
 
 ## Scenes included
 

@@ -1,0 +1,113 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/royal-table-soccer-ui/opcao2/Theme/Theme.uss" />
+    <Style src="project://database/Assets/UI/royal-table-soccer-ui/opcao2/Profile/Profile.uss" />
+
+    <ui:VisualElement name="root" class="rts2-root rts2-stage">
+        <ui:VisualElement class="rts2-stage-overlay" />
+        <ui:VisualElement class="rts2-stage-grain" />
+
+        <!-- Top -->
+        <ui:VisualElement class="pf2-top">
+            <ui:Button name="btn-back" class="rts2-chev" text="&lt;" />
+            <ui:Label class="rts2-eyebrow" text="PERFIL DO TECNICO" />
+            <ui:VisualElement class="rts2-chip"><ui:Label name="lbl-rank-chip" text="RANK 34 - BRONZE I" /></ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- Body -->
+        <ui:VisualElement class="pf2-body">
+
+            <!-- Coach card -->
+            <ui:VisualElement class="pf2-left">
+                <ui:VisualElement class="pf2-coach rts2-card">
+                    <ui:VisualElement class="ts2-fut-corner-tl" />
+                    <ui:VisualElement class="ts2-fut-corner-br" />
+
+                    <ui:VisualElement class="pf2-coach-head">
+                        <ui:VisualElement class="pf2-coach-ovr">
+                            <ui:Label name="lbl-coach-ovr" class="pf2-coach-num" text="68" />
+                            <ui:Label class="pf2-coach-pos" text="TEC" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="pf2-coach-flag">
+                            <ui:VisualElement name="coach-country" class="pf2-coach-country" />
+                            <ui:VisualElement name="coach-league" class="pf2-coach-league" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+
+                    <ui:VisualElement name="coach-photo" class="pf2-coach-photo" />
+
+                    <ui:Label name="lbl-name" class="pf2-coach-name" text="MAFIAZOUK" />
+
+                    <ui:VisualElement class="pf2-coach-stats">
+                        <ui:VisualElement class="ts2-fut-stat"><ui:Label name="lbl-level" class="ts2-fut-stat-v" text="1" /><ui:Label class="ts2-fut-stat-k" text="LV" /></ui:VisualElement>
+                        <ui:VisualElement class="ts2-fut-stat"><ui:Label name="lbl-goals-mini" class="ts2-fut-stat-v" text="12" /><ui:Label class="ts2-fut-stat-k" text="GOL" /></ui:VisualElement>
+                        <ui:VisualElement class="ts2-fut-stat"><ui:Label name="lbl-online-mini" class="ts2-fut-stat-v" text="0" /><ui:Label class="ts2-fut-stat-k" text="VIT" /></ui:VisualElement>
+                        <ui:VisualElement class="ts2-fut-stat"><ui:Label name="lbl-trophies-mini" class="ts2-fut-stat-v" text="3" /><ui:Label class="ts2-fut-stat-k" text="TRO" /></ui:VisualElement>
+                        <ui:VisualElement class="ts2-fut-stat"><ui:Label name="lbl-streak-mini" class="ts2-fut-stat-v" text="0" /><ui:Label class="ts2-fut-stat-k" text="STR" /></ui:VisualElement>
+                        <ui:VisualElement class="ts2-fut-stat"><ui:Label name="lbl-xp-mini" class="ts2-fut-stat-v" text="120" /><ui:Label class="ts2-fut-stat-k" text="XP" /></ui:VisualElement>
+                    </ui:VisualElement>
+
+                    <ui:VisualElement class="pf2-photo-actions">
+                        <ui:Button name="btn-pick-photo" class="rts2-chip pf2-photo-btn" text="GALERIA" />
+                        <ui:Button name="btn-take-photo" class="rts2-chip pf2-photo-btn" text="CAMERA" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+            <!-- Right column -->
+            <ui:VisualElement class="pf2-right">
+
+                <ui:VisualElement class="pf2-section">
+                    <ui:Label class="rts2-eyebrow pf2-section-title" text="CARREIRA" />
+                    <ui:VisualElement class="pf2-stats-grid">
+                        <ui:VisualElement class="pf2-stat-pill">
+                            <ui:Label name="lbl-online-wins" class="pf2-stat-num" text="0" />
+                            <ui:Label class="pf2-stat-lbl" text="ONLINE WINS" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="pf2-stat-pill">
+                            <ui:Label name="lbl-star-wins" class="pf2-stat-num" text="0" />
+                            <ui:Label class="pf2-stat-lbl" text="STAR LEAGUE" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="pf2-stat-pill">
+                            <ui:Label name="lbl-trophies" class="pf2-stat-num" text="3" />
+                            <ui:Label class="pf2-stat-lbl" text="TROFEUS" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="pf2-stat-pill">
+                            <ui:Label name="lbl-goals" class="pf2-stat-num" text="12" />
+                            <ui:Label class="pf2-stat-lbl" text="GOLS" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+
+                <ui:VisualElement class="pf2-section">
+                    <ui:Label class="rts2-eyebrow pf2-section-title" text="CONQUISTAS" />
+                    <ui:VisualElement class="pf2-ach-grid">
+                        <ui:VisualElement name="ach-1" class="pf2-ach"><ui:Label class="pf2-ach-icon" text="*" /></ui:VisualElement>
+                        <ui:VisualElement name="ach-2" class="pf2-ach pf2-ach-silver"><ui:Label class="pf2-ach-icon" text="o" /></ui:VisualElement>
+                        <ui:VisualElement name="ach-3" class="pf2-ach pf2-ach-bronze"><ui:Label class="pf2-ach-icon" text="^" /></ui:VisualElement>
+                        <ui:VisualElement name="ach-4" class="pf2-ach pf2-ach-locked"><ui:Label class="pf2-ach-icon" text="x" /></ui:VisualElement>
+                        <ui:VisualElement name="ach-5" class="pf2-ach pf2-ach-locked"><ui:Label class="pf2-ach-icon" text="x" /></ui:VisualElement>
+                        <ui:VisualElement name="ach-6" class="pf2-ach pf2-ach-locked"><ui:Label class="pf2-ach-icon" text="x" /></ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+
+                <ui:VisualElement class="pf2-section">
+                    <ui:Label class="rts2-eyebrow pf2-section-title" text="ULTIMAS PARTIDAS" />
+                    <ui:VisualElement class="pf2-form-strip">
+                        <ui:VisualElement name="form-1" class="pf2-form-square pf2-form-W"><ui:Label class="pf2-form-letter" text="V" /></ui:VisualElement>
+                        <ui:VisualElement name="form-2" class="pf2-form-square pf2-form-L"><ui:Label class="pf2-form-letter" text="D" /></ui:VisualElement>
+                        <ui:VisualElement name="form-3" class="pf2-form-square pf2-form-W"><ui:Label class="pf2-form-letter" text="V" /></ui:VisualElement>
+                        <ui:VisualElement name="form-4" class="pf2-form-square pf2-form-D"><ui:Label class="pf2-form-letter" text="E" /></ui:VisualElement>
+                        <ui:VisualElement name="form-5" class="pf2-form-square pf2-form-W"><ui:Label class="pf2-form-letter" text="V" /></ui:VisualElement>
+                        <ui:Label name="lbl-form-summary" class="pf2-form-summary" text="3V - 1E - 1D" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- Bottom CTAs -->
+        <ui:VisualElement class="pf2-bottom">
+            <ui:Button name="btn-edit-name" class="rts2-cta rts2-cta-ghost" text="EDITAR NOME" />
+            <ui:Button name="btn-share" class="rts2-cta" text="COMPARTILHAR" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,0 +1,99 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/royal-table-soccer-ui/opcao2/Theme/Theme.uss" />
+    <Style src="project://database/Assets/UI/royal-table-soccer-ui/opcao2/TeamSelect/TeamSelect.uss" />
+
+    <ui:VisualElement name="root" class="rts2-root rts2-stage">
+        <ui:VisualElement class="rts2-stage-overlay" />
+        <ui:VisualElement class="rts2-stage-grain" />
+
+        <!-- Top header -->
+        <ui:VisualElement class="ts2-top">
+            <ui:Button name="btn-back" class="rts2-chev" text="&lt;" />
+            <ui:VisualElement class="ts2-top-center">
+                <ui:Label class="rts2-crumb" text="CAMPEONATO &gt;&gt; LIGA &gt;&gt; TIME" />
+                <ui:VisualElement class="ts2-step">
+                    <ui:VisualElement class="ts2-step-dot ts2-step-done" />
+                    <ui:VisualElement class="ts2-step-bar ts2-step-done" />
+                    <ui:VisualElement class="ts2-step-dot ts2-step-done" />
+                    <ui:VisualElement class="ts2-step-bar ts2-step-active" />
+                    <ui:VisualElement class="ts2-step-dot ts2-step-active" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement class="rts2-chip"><ui:Label name="lbl-league" text="PRIMERA DIVISION" /></ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- Arena: small previews | big card | small previews -->
+        <ui:VisualElement class="ts2-arena">
+
+            <ui:VisualElement class="ts2-side">
+                <ui:VisualElement name="prev-1" class="ts2-mini ts2-mini-dim">
+                    <ui:VisualElement name="prev-1-crest" class="ts2-mini-crest" />
+                    <ui:Label name="prev-1-ovr" class="ts2-mini-ovr" text="71" />
+                    <ui:Label name="prev-1-name" class="ts2-mini-name" text="RIVER PLATE" />
+                </ui:VisualElement>
+                <ui:VisualElement name="prev-2" class="ts2-mini">
+                    <ui:VisualElement name="prev-2-crest" class="ts2-mini-crest" />
+                    <ui:Label name="prev-2-ovr" class="ts2-mini-ovr" text="75" />
+                    <ui:Label name="prev-2-name" class="ts2-mini-name" text="BOCA JRS" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+            <!-- FUT card -->
+            <ui:VisualElement class="ts2-fut rts2-card">
+                <ui:VisualElement class="ts2-fut-corner-tl" />
+                <ui:VisualElement class="ts2-fut-corner-br" />
+
+                <ui:VisualElement class="ts2-fut-head">
+                    <ui:VisualElement class="ts2-fut-ovr">
+                        <ui:Label name="lbl-team-ovr" class="ts2-fut-ovr-num" text="82" />
+                        <ui:Label class="ts2-fut-ovr-pos" text="CLUBE" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="ts2-fut-flag">
+                        <ui:VisualElement name="team-country" class="ts2-fut-country" />
+                        <ui:VisualElement name="team-league" class="ts2-fut-league" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+
+                <ui:VisualElement class="ts2-fut-body">
+                    <ui:VisualElement name="team-crest" class="ts2-crest-big" />
+                    <ui:Label name="lbl-team-name" class="ts2-fut-name" text="ARSENAL SARANDI" />
+                </ui:VisualElement>
+
+                <ui:VisualElement class="ts2-fut-stats">
+                    <ui:VisualElement class="ts2-fut-stat"><ui:Label name="stat-att" class="ts2-fut-stat-v" text="84" /><ui:Label class="ts2-fut-stat-k" text="ATA" /></ui:VisualElement>
+                    <ui:VisualElement class="ts2-fut-stat"><ui:Label name="stat-pace" class="ts2-fut-stat-v" text="86" /><ui:Label class="ts2-fut-stat-k" text="RIT" /></ui:VisualElement>
+                    <ui:VisualElement class="ts2-fut-stat"><ui:Label name="stat-mid" class="ts2-fut-stat-v" text="78" /><ui:Label class="ts2-fut-stat-k" text="MEI" /></ui:VisualElement>
+                    <ui:VisualElement class="ts2-fut-stat"><ui:Label name="stat-stamina" class="ts2-fut-stat-v" text="79" /><ui:Label class="ts2-fut-stat-k" text="RES" /></ui:VisualElement>
+                    <ui:VisualElement class="ts2-fut-stat"><ui:Label name="stat-def" class="ts2-fut-stat-v" text="80" /><ui:Label class="ts2-fut-stat-k" text="DEF" /></ui:VisualElement>
+                    <ui:VisualElement class="ts2-fut-stat"><ui:Label name="stat-morale" class="ts2-fut-stat-v" text="85" /><ui:Label class="ts2-fut-stat-k" text="MOR" /></ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+            <ui:VisualElement class="ts2-side">
+                <ui:VisualElement name="prev-3" class="ts2-mini">
+                    <ui:VisualElement name="prev-3-crest" class="ts2-mini-crest" />
+                    <ui:Label name="prev-3-ovr" class="ts2-mini-ovr" text="77" />
+                    <ui:Label name="prev-3-name" class="ts2-mini-name" text="RACING CLUB" />
+                </ui:VisualElement>
+                <ui:VisualElement name="prev-4" class="ts2-mini ts2-mini-dim">
+                    <ui:VisualElement name="prev-4-crest" class="ts2-mini-crest" />
+                    <ui:Label name="prev-4-ovr" class="ts2-mini-ovr" text="73" />
+                    <ui:Label name="prev-4-name" class="ts2-mini-name" text="SAN LORENZO" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- Bottom: nav + formation + CTAs -->
+        <ui:VisualElement class="ts2-bottom">
+            <ui:Button name="btn-prev-team" class="rts2-chev" text="&lt;" />
+            <ui:VisualElement class="ts2-form-block">
+                <ui:Button name="btn-prev-form" class="rts2-chev" text="&lt;" />
+                <ui:Label name="lbl-formation" class="ts2-form-lbl" text="1 - 2 - 1 - 1" />
+                <ui:Button name="btn-next-form" class="rts2-chev" text="&gt;" />
+            </ui:VisualElement>
+            <ui:Button name="btn-cancel" class="rts2-cta rts2-cta-ghost" text="VOLTAR" />
+            <ui:Button name="btn-confirm" class="rts2-cta" text="CONFIRMAR" />
+            <ui:Button name="btn-next-team" class="rts2-chev" text="&gt;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

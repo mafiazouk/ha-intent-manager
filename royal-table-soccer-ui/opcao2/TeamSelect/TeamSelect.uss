@@ -1,0 +1,246 @@
+/* ===== Team Select (opcao2 — FUT premium) ===== */
+
+.ts2-top {
+    position: absolute;
+    top: 24px; left: 60px; right: 60px;
+    height: 90px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ts2-top-center {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.ts2-step {
+    flex-direction: row;
+    align-items: center;
+    margin-top: 8px;
+}
+
+.ts2-step-dot {
+    width: 14px;
+    height: 14px;
+    background-color: rgba(244, 241, 232, 0.35);
+}
+.ts2-step-bar {
+    width: 60px;
+    height: 2px;
+    background-color: rgba(244, 241, 232, 0.35);
+}
+.ts2-step-done,
+.ts2-step-active { background-color: rgb(255, 184, 0); }
+
+/* ----- Arena ----- */
+.ts2-arena {
+    position: absolute;
+    top: 140px; left: 0; right: 0;
+    bottom: 180px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.ts2-side {
+    flex-direction: column;
+    margin-left: 36px;
+    margin-right: 36px;
+}
+
+.ts2-mini {
+    width: 160px;
+    height: 240px;
+    background-color: rgb(10, 15, 28);
+    border-left-width: 2px; border-right-width: 2px;
+    border-top-width: 2px;  border-bottom-width: 2px;
+    border-left-color: rgba(255, 184, 0, 0.5);
+    border-right-color: rgba(255, 184, 0, 0.5);
+    border-top-color: rgba(255, 184, 0, 0.5);
+    border-bottom-color: rgba(255, 184, 0, 0.5);
+    margin-bottom: 18px;
+    align-items: center;
+    padding: 14px;
+    opacity: 0.65;
+}
+
+.ts2-mini-dim { opacity: 0.35; }
+
+.ts2-mini-crest {
+    width: 90px;
+    height: 90px;
+    border-top-left-radius: 999px;
+    border-top-right-radius: 999px;
+    border-bottom-left-radius: 999px;
+    border-bottom-right-radius: 999px;
+    background-image: url("project://database/Assets/Sprites/UI/crest_placeholder.png");
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.ts2-mini-ovr {
+    margin-top: 6px;
+    font-size: 32px;
+    color: rgb(255, 184, 0);
+}
+
+.ts2-mini-name {
+    font-size: 14px;
+    color: rgba(244, 241, 232, 0.6);
+    letter-spacing: 2px;
+    -unity-text-align: middle-center;
+}
+
+/* ----- FUT card ----- */
+.ts2-fut {
+    width: 520px;
+    height: 780px;
+    background-color: rgb(10, 15, 28);
+    padding: 36px 32px;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.ts2-fut-corner-tl {
+    position: absolute;
+    top: -14px; left: -14px;
+    width: 28px; height: 28px;
+    background-color: rgb(255, 184, 0);
+    rotate: 45deg;
+}
+.ts2-fut-corner-br {
+    position: absolute;
+    bottom: -14px; right: -14px;
+    width: 28px; height: 28px;
+    background-color: rgb(255, 184, 0);
+    rotate: 45deg;
+}
+
+.ts2-fut-head {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.ts2-fut-ovr {
+    flex-direction: column;
+    align-items: center;
+}
+
+.ts2-fut-ovr-num {
+    font-size: 96px;
+    color: rgb(255, 184, 0);
+}
+
+.ts2-fut-ovr-pos {
+    font-size: 24px;
+    color: rgb(255, 184, 0);
+    letter-spacing: 8px;
+    margin-top: -8px;
+}
+
+.ts2-fut-flag { flex-direction: column; align-items: center; }
+.ts2-fut-country {
+    width: 64px; height: 42px;
+    background-color: rgb(36, 83, 165);
+    border-left-width: 1px; border-right-width: 1px;
+    border-top-width: 1px;  border-bottom-width: 1px;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    background-image: url("project://database/Assets/Sprites/UI/flag_placeholder.png");
+    -unity-background-scale-mode: scale-and-crop;
+}
+.ts2-fut-league {
+    margin-top: 6px;
+    width: 50px; height: 50px;
+    border-top-left-radius: 999px;
+    border-top-right-radius: 999px;
+    border-bottom-left-radius: 999px;
+    border-bottom-right-radius: 999px;
+    background-color: rgb(255, 184, 0);
+    background-image: url("project://database/Assets/Sprites/UI/league_placeholder.png");
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.ts2-fut-body {
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+}
+
+.ts2-crest-big {
+    width: 280px;
+    height: 280px;
+    border-top-left-radius: 999px;
+    border-top-right-radius: 999px;
+    border-bottom-left-radius: 999px;
+    border-bottom-right-radius: 999px;
+    background-image: url("project://database/Assets/Sprites/UI/crest_placeholder.png");
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.ts2-fut-name {
+    margin-top: 12px;
+    font-size: 48px;
+    color: rgb(244, 241, 232);
+    letter-spacing: 6px;
+    -unity-text-align: middle-center;
+}
+
+.ts2-fut-stats {
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-left: 18px;
+    padding-right: 18px;
+}
+
+.ts2-fut-stat {
+    width: 50%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom-width: 1px;
+    border-bottom-color: rgba(255, 184, 0, 0.2);
+    padding-bottom: 4px;
+    padding-top: 6px;
+    padding-right: 12px;
+}
+
+.ts2-fut-stat-v {
+    font-size: 32px;
+    color: rgb(255, 184, 0);
+}
+
+.ts2-fut-stat-k {
+    font-size: 20px;
+    color: rgba(244, 241, 232, 0.6);
+    letter-spacing: 4px;
+}
+
+/* ----- Bottom bar ----- */
+.ts2-bottom {
+    position: absolute;
+    bottom: 36px; left: 0; right: 0;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.ts2-bottom > * { margin-left: 18px; margin-right: 18px; }
+
+.ts2-form-block {
+    flex-direction: row;
+    align-items: center;
+}
+.ts2-form-block .rts2-chev { margin-left: 14px; margin-right: 14px; }
+
+.ts2-form-lbl {
+    font-size: 42px;
+    color: rgb(255, 184, 0);
+    letter-spacing: 10px;
+    min-width: 280px;
+    -unity-text-align: middle-center;
+}

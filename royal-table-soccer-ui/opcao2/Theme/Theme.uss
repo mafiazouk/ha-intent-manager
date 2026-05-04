@@ -1,0 +1,241 @@
+/* =========================================================
+   ROYAL TABLE SOCCER — OPCAO 2 (FUT Premium)
+   Tokens: black + gold + crimson, angular shapes, dense info
+   ========================================================= */
+
+:root {
+    /* ---------- Color palette ---------- */
+    --rts2-bg-deep:     rgb(6, 8, 15);
+    --rts2-bg-mid:      rgb(13, 19, 34);
+    --rts2-bg-card:     rgb(10, 15, 28);
+    --rts2-bg-card-lo:  rgba(10, 15, 28, 0.85);
+    --rts2-bg-warm:     rgb(26, 20, 8);
+
+    --rts2-gold:        rgb(255, 184, 0);
+    --rts2-gold-hi:     rgb(255, 210, 76);
+    --rts2-gold-lo:     rgb(138, 93, 0);
+
+    --rts2-crimson:     rgb(229, 34, 60);
+    --rts2-crimson-hi:  rgb(255, 79, 102);
+
+    --rts2-ice:         rgb(92, 182, 255);
+    --rts2-green:       rgb(61, 220, 132);
+
+    --rts2-text:        rgb(244, 241, 232);
+    --rts2-text-dim:    rgba(244, 241, 232, 0.6);
+    --rts2-text-muted:  rgba(244, 241, 232, 0.35);
+
+    --rts2-stroke:      rgba(255, 184, 0, 0.5);
+    --rts2-stroke-hi:   rgba(255, 184, 0, 0.95);
+
+    /* ---------- Spacing ---------- */
+    --rts2-sp-1: 4px;
+    --rts2-sp-2: 8px;
+    --rts2-sp-3: 14px;
+    --rts2-sp-4: 24px;
+    --rts2-sp-5: 36px;
+    --rts2-sp-6: 60px;
+
+    /* ---------- Typography sizes ---------- */
+    --rts2-fs-xs: 16px;
+    --rts2-fs-sm: 22px;
+    --rts2-fs-md: 32px;
+    --rts2-fs-lg: 48px;
+    --rts2-fs-xl: 72px;
+    --rts2-fs-xxl: 120px;
+}
+
+/* ---------- Global font ---------- */
+.rts2-root,
+.rts2-root Label,
+.rts2-root Button {
+    -unity-font-definition: url("project://database/Assets/Fonts/LilitaOne-Regular%20SDF.asset");
+    color: var(--rts2-text);
+    -unity-text-align: middle-center;
+    letter-spacing: 1px;
+}
+
+/* ---------- Stage ---------- */
+.rts2-stage {
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+    background-color: var(--rts2-bg-deep);
+    background-image: url("project://database/Assets/Sprites/UI/stadium_night.png");
+    -unity-background-scale-mode: scale-and-crop;
+    align-items: center;
+    justify-content: center;
+}
+
+.rts2-stage-overlay {
+    position: absolute;
+    left: 0; top: 0; right: 0; bottom: 0;
+    background-color: rgba(6, 8, 15, 0.78);
+}
+
+.rts2-stage-grain {
+    position: absolute;
+    left: 0; top: 0; right: 0; bottom: 0;
+    background-image: url("project://database/Assets/Sprites/UI/grain_overlay.png");
+    -unity-background-scale-mode: stretch-to-fill;
+    opacity: 0.18;
+}
+
+/* ---------- Cards (sharp, gold border) ---------- */
+.rts2-card {
+    background-color: var(--rts2-bg-card);
+    border-left-width: 3px;
+    border-right-width: 3px;
+    border-top-width: 3px;
+    border-bottom-width: 3px;
+    border-left-color: var(--rts2-gold);
+    border-right-color: var(--rts2-gold);
+    border-top-color: var(--rts2-gold);
+    border-bottom-color: var(--rts2-gold);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    padding: var(--rts2-sp-5);
+}
+
+.rts2-card-soft {
+    border-left-color: var(--rts2-stroke);
+    border-right-color: var(--rts2-stroke);
+    border-top-color: var(--rts2-stroke);
+    border-bottom-color: var(--rts2-stroke);
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    background-color: var(--rts2-bg-card-lo);
+}
+
+.rts2-card-corner {
+    /* gold square stuck to top-left of any card to fake the angular cut */
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    background-color: var(--rts2-gold);
+    rotate: 45deg;
+}
+
+/* ---------- CTA buttons (parallelogram via skew is not supported in USS;
+   we approximate with sharp corners + heavy gold fill) ---------- */
+.rts2-cta {
+    height: 80px;
+    min-width: 280px;
+    padding-left: var(--rts2-sp-5);
+    padding-right: var(--rts2-sp-5);
+    background-color: var(--rts2-gold);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 3px;
+    border-bottom-width: 3px;
+    border-top-color: var(--rts2-gold-hi);
+    border-bottom-color: var(--rts2-gold-lo);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    color: rgb(0, 0, 0);
+    font-size: var(--rts2-fs-md);
+    letter-spacing: 6px;
+    transition-property: scale, background-color, color;
+    transition-duration: 120ms;
+}
+
+.rts2-cta:hover {
+    background-color: var(--rts2-gold-hi);
+    scale: 1.04 1.04;
+}
+.rts2-cta:active {
+    scale: 0.97 0.97;
+    background-color: var(--rts2-gold-lo);
+}
+
+.rts2-cta-ghost {
+    background-color: rgba(0, 0, 0, 0);
+    color: var(--rts2-gold);
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-left-color: var(--rts2-gold);
+    border-right-color: var(--rts2-gold);
+    border-top-color: var(--rts2-gold);
+    border-bottom-color: var(--rts2-gold);
+}
+.rts2-cta-ghost:hover {
+    background-color: rgba(255, 184, 0, 0.12);
+    color: var(--rts2-gold-hi);
+}
+
+.rts2-cta-danger {
+    background-color: var(--rts2-crimson);
+    color: rgb(255, 255, 255);
+    border-top-color: var(--rts2-crimson-hi);
+    border-bottom-color: rgb(122, 10, 24);
+}
+.rts2-cta-danger:hover { background-color: var(--rts2-crimson-hi); }
+
+/* ---------- Chevron icon button ---------- */
+.rts2-chev {
+    width: 90px;
+    height: 90px;
+    background-color: var(--rts2-bg-card);
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    border-left-color: var(--rts2-stroke);
+    border-right-color: var(--rts2-stroke);
+    border-top-color: var(--rts2-stroke);
+    border-bottom-color: var(--rts2-stroke);
+    color: var(--rts2-gold);
+    font-size: 48px;
+    transition-property: scale, background-color, color;
+    transition-duration: 120ms;
+}
+
+.rts2-chev:hover {
+    background-color: var(--rts2-gold);
+    color: rgb(0, 0, 0);
+    scale: 1.06 1.06;
+}
+.rts2-chev:active { scale: 0.92 0.92; }
+
+/* ---------- Chip ---------- */
+.rts2-chip {
+    height: 50px;
+    padding-left: var(--rts2-sp-4);
+    padding-right: var(--rts2-sp-4);
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-left-color: var(--rts2-stroke);
+    border-right-color: var(--rts2-stroke);
+    border-top-color: var(--rts2-stroke);
+    border-bottom-color: var(--rts2-stroke);
+}
+.rts2-chip Label {
+    font-size: var(--rts2-fs-sm);
+    color: var(--rts2-text);
+    letter-spacing: 3px;
+}
+
+/* ---------- Titles / eyebrow ---------- */
+.rts2-eyebrow {
+    font-size: var(--rts2-fs-sm);
+    color: var(--rts2-gold);
+    letter-spacing: 8px;
+}
+
+.rts2-crumb {
+    font-size: 18px;
+    color: var(--rts2-text-dim);
+    letter-spacing: 6px;
+}

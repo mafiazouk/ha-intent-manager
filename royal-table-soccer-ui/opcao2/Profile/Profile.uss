@@ -1,0 +1,252 @@
+/* ===== Profile (opcao2 — coach card) ===== */
+
+.pf2-top {
+    position: absolute;
+    top: 24px; left: 60px; right: 60px;
+    height: 90px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.pf2-body {
+    position: absolute;
+    top: 140px; left: 60px; right: 60px;
+    bottom: 140px;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+/* ----- Coach card (left) ----- */
+.pf2-left {
+    flex-direction: row;
+    align-items: center;
+    margin-right: 36px;
+}
+
+.pf2-coach {
+    width: 520px;
+    height: 780px;
+    background-color: rgb(10, 15, 28);
+    padding: 32px 28px;
+    flex-direction: column;
+}
+
+.pf2-coach-head {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.pf2-coach-ovr { flex-direction: column; align-items: center; }
+.pf2-coach-num { font-size: 96px; color: rgb(255, 184, 0); }
+.pf2-coach-pos { font-size: 24px; color: rgb(255, 184, 0); letter-spacing: 8px; margin-top: -8px; }
+
+.pf2-coach-flag { flex-direction: column; align-items: center; }
+.pf2-coach-country {
+    width: 64px; height: 42px;
+    background-color: rgb(36, 83, 165);
+    background-image: url("project://database/Assets/Sprites/UI/flag_placeholder.png");
+    -unity-background-scale-mode: scale-and-crop;
+}
+.pf2-coach-league {
+    margin-top: 6px;
+    width: 50px; height: 50px;
+    border-top-left-radius: 999px;
+    border-top-right-radius: 999px;
+    border-bottom-left-radius: 999px;
+    border-bottom-right-radius: 999px;
+    background-color: rgb(255, 184, 0);
+    background-image: url("project://database/Assets/Sprites/UI/league_placeholder.png");
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.pf2-coach-photo {
+    margin-top: 12px;
+    width: 100%;
+    height: 320px;
+    background-image: url("project://database/Assets/Sprites/UI/avatar_placeholder.png");
+    -unity-background-scale-mode: scale-and-crop;
+    border-bottom-width: 2px;
+    border-bottom-color: rgb(255, 184, 0);
+}
+
+.pf2-coach-name {
+    margin-top: 18px;
+    font-size: 48px;
+    color: rgb(244, 241, 232);
+    letter-spacing: 6px;
+    -unity-text-align: middle-center;
+}
+
+.pf2-coach-stats {
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 18px;
+    padding-left: 18px;
+    padding-right: 18px;
+}
+
+.pf2-photo-actions {
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 14px;
+}
+
+.pf2-photo-btn {
+    margin-left: 8px;
+    margin-right: 8px;
+    height: 50px;
+    min-width: 130px;
+    background-color: rgba(255, 184, 0, 0.12);
+    color: rgb(255, 184, 0);
+    border-left-color: rgb(255, 184, 0);
+    border-right-color: rgb(255, 184, 0);
+    border-top-color: rgb(255, 184, 0);
+    border-bottom-color: rgb(255, 184, 0);
+    border-left-width: 1px; border-right-width: 1px;
+    border-top-width: 1px; border-bottom-width: 1px;
+    font-size: 18px;
+    letter-spacing: 4px;
+}
+.pf2-photo-btn:hover {
+    background-color: rgb(255, 184, 0);
+    color: rgb(0, 0, 0);
+}
+
+/* ----- Right column ----- */
+.pf2-right {
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.pf2-section {
+    background-color: rgba(10, 15, 28, 0.85);
+    border-left-width: 2px; border-right-width: 2px;
+    border-top-width: 2px;  border-bottom-width: 2px;
+    border-left-color: rgba(255, 184, 0, 0.5);
+    border-right-color: rgba(255, 184, 0, 0.5);
+    border-top-color: rgba(255, 184, 0, 0.5);
+    border-bottom-color: rgba(255, 184, 0, 0.5);
+    padding: 24px 28px;
+    margin-bottom: 18px;
+}
+
+.pf2-section-title {
+    font-size: 18px;
+    -unity-text-align: middle-left;
+    letter-spacing: 8px;
+}
+
+.pf2-stats-grid {
+    margin-top: 14px;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.pf2-stat-pill {
+    flex-grow: 1;
+    margin-left: 6px;
+    margin-right: 6px;
+    background-color: rgba(0, 0, 0, 0.55);
+    border-left-width: 1px; border-right-width: 1px;
+    border-top-width: 1px;  border-bottom-width: 1px;
+    border-left-color: rgba(255, 184, 0, 0.5);
+    border-right-color: rgba(255, 184, 0, 0.5);
+    border-top-color: rgba(255, 184, 0, 0.5);
+    border-bottom-color: rgba(255, 184, 0, 0.5);
+    padding: 18px 12px;
+    align-items: center;
+}
+
+.pf2-stat-num {
+    font-size: 62px;
+    color: rgb(255, 184, 0);
+}
+
+.pf2-stat-lbl {
+    margin-top: 4px;
+    font-size: 18px;
+    color: rgba(244, 241, 232, 0.6);
+    letter-spacing: 4px;
+}
+
+/* Achievements */
+.pf2-ach-grid {
+    margin-top: 14px;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.pf2-ach {
+    width: 100px;
+    height: 100px;
+    margin-left: 6px;
+    margin-right: 6px;
+    background-color: rgb(10, 15, 28);
+    border-left-width: 2px; border-right-width: 2px;
+    border-top-width: 2px;  border-bottom-width: 2px;
+    border-left-color: rgba(255, 184, 0, 0.5);
+    border-right-color: rgba(255, 184, 0, 0.5);
+    border-top-color: rgba(255, 184, 0, 0.5);
+    border-bottom-color: rgba(255, 184, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+}
+
+.pf2-ach-icon {
+    font-size: 38px;
+    color: rgb(255, 184, 0);
+}
+
+.pf2-ach-silver { border-left-color: rgb(205, 210, 221); border-right-color: rgb(205, 210, 221); border-top-color: rgb(205, 210, 221); border-bottom-color: rgb(205, 210, 221); }
+.pf2-ach-silver .pf2-ach-icon { color: rgb(205, 210, 221); }
+
+.pf2-ach-bronze { border-left-color: rgb(205, 127, 50); border-right-color: rgb(205, 127, 50); border-top-color: rgb(205, 127, 50); border-bottom-color: rgb(205, 127, 50); }
+.pf2-ach-bronze .pf2-ach-icon { color: rgb(205, 127, 50); }
+
+.pf2-ach-locked { border-left-color: rgba(244, 241, 232, 0.18); border-right-color: rgba(244, 241, 232, 0.18); border-top-color: rgba(244, 241, 232, 0.18); border-bottom-color: rgba(244, 241, 232, 0.18); }
+.pf2-ach-locked .pf2-ach-icon { color: rgba(244, 241, 232, 0.35); }
+
+/* Form strip */
+.pf2-form-strip {
+    margin-top: 14px;
+    flex-direction: row;
+    align-items: center;
+}
+
+.pf2-form-square {
+    width: 60px;
+    height: 60px;
+    margin-right: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.pf2-form-letter {
+    font-size: 28px;
+    color: rgb(0, 0, 0);
+}
+
+.pf2-form-W { background-color: rgb(61, 220, 132); }
+.pf2-form-D { background-color: rgb(255, 184, 0); }
+.pf2-form-L { background-color: rgb(229, 34, 60); }
+
+.pf2-form-summary {
+    margin-left: 18px;
+    font-size: 20px;
+    color: rgba(244, 241, 232, 0.6);
+    letter-spacing: 4px;
+}
+
+/* Bottom */
+.pf2-bottom {
+    position: absolute;
+    bottom: 36px; left: 0; right: 0;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.pf2-bottom > .rts2-cta { margin-left: 24px; margin-right: 24px; min-width: 320px; }

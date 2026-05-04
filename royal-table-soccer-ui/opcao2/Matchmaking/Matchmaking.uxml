@@ -1,0 +1,79 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/royal-table-soccer-ui/opcao2/Theme/Theme.uss" />
+    <Style src="project://database/Assets/UI/royal-table-soccer-ui/opcao2/Matchmaking/Matchmaking.uss" />
+
+    <ui:VisualElement name="root" class="rts2-root rts2-stage">
+        <ui:VisualElement class="rts2-stage-overlay" />
+        <ui:VisualElement class="mm2-bg-left" />
+        <ui:VisualElement class="mm2-bg-right" />
+        <ui:VisualElement class="rts2-stage-grain" />
+
+        <!-- Header -->
+        <ui:VisualElement class="mm2-header">
+            <ui:Label class="rts2-eyebrow" text="MATCHMAKING" />
+            <ui:Label class="mm2-title" text="BUSCANDO ADVERSARIO REAL" />
+            <ui:Label name="lbl-timer" class="mm2-timer" text="00 : 28" />
+            <ui:Label name="lbl-status" class="mm2-status" text="CALIBRANDO HABILIDADE..." />
+        </ui:VisualElement>
+
+        <!-- Arena -->
+        <ui:VisualElement class="mm2-arena">
+
+            <!-- Local fighter -->
+            <ui:VisualElement class="mm2-fighter mm2-fighter-left">
+                <ui:VisualElement name="left-photo" class="mm2-fighter-photo" />
+                <ui:VisualElement class="mm2-fighter-info">
+                    <ui:Label name="lbl-left-name" class="mm2-fighter-name mm2-name-left" text="MAFIAZOUK" />
+                    <ui:Label name="lbl-left-meta" class="mm2-fighter-meta" text="LV 1 - RANK 34" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+            <!-- VS centerpiece -->
+            <ui:VisualElement class="mm2-vs">
+                <ui:Label class="mm2-vs-text" text="VS" />
+                <ui:VisualElement name="mm2-pulse" class="mm2-pulse" />
+            </ui:VisualElement>
+
+            <!-- Opponent fighter -->
+            <ui:VisualElement class="mm2-fighter mm2-fighter-right">
+                <ui:VisualElement name="right-photo" class="mm2-fighter-photo mm2-fighter-photo-unknown">
+                    <ui:Label name="lbl-question" class="mm2-fighter-question" text="?" />
+                </ui:VisualElement>
+                <ui:VisualElement class="mm2-fighter-info">
+                    <ui:Label name="lbl-right-name" class="mm2-fighter-name mm2-name-right" text="PROCURANDO" />
+                    <ui:Label name="lbl-right-meta" class="mm2-fighter-meta" text="-" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- Stat comparison row -->
+        <ui:VisualElement class="mm2-compare">
+            <ui:VisualElement class="mm2-compare-col">
+                <ui:Label name="lbl-cmp-left-1" class="mm2-cmp-v mm2-cmp-vL" text="68" />
+                <ui:Label class="mm2-cmp-k" text="OVR" />
+                <ui:Label class="mm2-cmp-vs" text="VS" />
+                <ui:Label class="mm2-cmp-k" text="OVR" />
+                <ui:Label name="lbl-cmp-right-1" class="mm2-cmp-v mm2-cmp-vR" text="??" />
+            </ui:VisualElement>
+            <ui:VisualElement class="mm2-compare-col">
+                <ui:Label name="lbl-cmp-left-2" class="mm2-cmp-v mm2-cmp-vL" text="12" />
+                <ui:Label class="mm2-cmp-k" text="VITORIAS" />
+                <ui:Label class="mm2-cmp-vs" text="VS" />
+                <ui:Label class="mm2-cmp-k" text="VITORIAS" />
+                <ui:Label name="lbl-cmp-right-2" class="mm2-cmp-v mm2-cmp-vR" text="??" />
+            </ui:VisualElement>
+            <ui:VisualElement class="mm2-compare-col">
+                <ui:Label name="lbl-cmp-left-3" class="mm2-cmp-v mm2-cmp-vL" text="3V" />
+                <ui:Label class="mm2-cmp-k" text="FORMA" />
+                <ui:Label class="mm2-cmp-vs" text="VS" />
+                <ui:Label class="mm2-cmp-k" text="FORMA" />
+                <ui:Label name="lbl-cmp-right-3" class="mm2-cmp-v mm2-cmp-vR" text="??" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- Cancel CTA -->
+        <ui:VisualElement class="mm2-bottom">
+            <ui:Button name="btn-cancel" class="rts2-cta rts2-cta-danger" text="CANCELAR BUSCA" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

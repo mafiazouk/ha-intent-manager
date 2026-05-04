@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Royal Table Soccer — UI Preview (Opcao 2: FUT Premium)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-deep:#06080f; --bg-mid:#0d1322; --bg-card:#0a0f1c;
+    --gold:#FFB800; --gold-hi:#FFD24C; --gold-lo:#8a5d00;
+    --crimson:#E5223C; --crimson-hi:#FF4F66;
+    --ice:#5CB6FF; --green:#3DDC84;
+    --text:#F4F1E8; --text-dim:rgba(244,241,232,.6); --text-muted:rgba(244,241,232,.35);
+    --stroke:rgba(255,184,0,.5); --stroke-hi:rgba(255,184,0,.95);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'Lilita One',system-ui,sans-serif;letter-spacing:1px}
+  html,body{background:#000;color:var(--text);min-height:100vh;overflow-x:hidden}
+  body{display:flex;flex-direction:column;align-items:center}
+
+  header{
+    position:sticky;top:0;z-index:10;width:100%;padding:10px 12px;
+    background:linear-gradient(#06080f, #0d1322);
+    border-bottom:1px solid var(--stroke);
+    display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center
+  }
+  header h1{flex-basis:100%;text-align:center;font-size:14px;color:var(--gold);letter-spacing:4px;margin-bottom:6px}
+  .tab{
+    background:transparent;color:var(--text);border:2px solid var(--stroke);
+    border-radius:0;padding:8px 18px;font-size:13px;letter-spacing:2px;cursor:pointer;
+    clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%)
+  }
+  .tab.active{background:var(--gold);color:#000;border-color:var(--gold-hi)}
+  .hint{font-size:11px;color:var(--text-dim);text-align:center;flex-basis:100%;margin-top:4px}
+
+  .viewport{
+    width:100vw;aspect-ratio:16/9;overflow:hidden;position:relative;margin-top:8px;
+    border-top:1px solid var(--stroke);border-bottom:1px solid var(--stroke);
+  }
+  .stage{width:1920px;height:1080px;position:absolute;top:0;left:0;transform-origin:top left}
+
+  .scene{
+    position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(255,184,0,.06), transparent 55%),
+      radial-gradient(ellipse at 50% 110%, rgba(229,34,60,.10), transparent 55%),
+      linear-gradient(#06080f,#0d1322 60%,#06080f);
+  }
+  .scene::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      repeating-linear-gradient(45deg, rgba(255,184,0,.025) 0 2px, transparent 2px 80px);
+  }
+  .scene::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(circle at 50% 100%, rgba(36,110,60,.25), transparent 50%);
+  }
+
+  /* ============ shared widgets ============ */
+  .eyebrow{font-size:22px;color:var(--gold);letter-spacing:8px}
+  .crumb{font-size:18px;color:var(--text-dim);letter-spacing:6px}
+  .crumb b{color:var(--gold);font-weight:normal}
+
+  /* angular CTA */
+  .cta{
+    position:relative;padding:18px 48px;font-size:32px;letter-spacing:6px;color:#000;
+    background:linear-gradient(180deg,var(--gold-hi),var(--gold) 50%,var(--gold-lo));
+    border:0;cursor:pointer;
+    clip-path:polygon(20px 0,100% 0,calc(100% - 20px) 100%,0 100%);
+    box-shadow:0 0 30px rgba(255,184,0,.35)
+  }
+  .cta.ghost{background:transparent;color:var(--gold);border:2px solid var(--gold);box-shadow:none}
+  .cta.danger{background:linear-gradient(180deg,var(--crimson-hi),var(--crimson) 50%,#7a0a18);color:#fff;box-shadow:0 0 30px rgba(229,34,60,.45)}
+
+  /* angular icon button (chevron) */
+  .chev{
+    width:90px;height:90px;display:flex;align-items:center;justify-content:center;
+    background:var(--bg-card);border:2px solid var(--stroke);color:var(--gold);font-size:48px;
+    clip-path:polygon(20px 0,100% 0,calc(100% - 20px) 100%,0 100%);cursor:pointer
+  }
+  .chev:hover{background:var(--gold);color:#000}
+
+  .chip{
+    height:50px;padding:0 22px;background:rgba(0,0,0,.6);border:1px solid var(--stroke);
+    color:var(--text);display:inline-flex;align-items:center;font-size:20px;letter-spacing:3px;
+    clip-path:polygon(14px 0,100% 0,calc(100% - 14px) 100%,0 100%)
+  }
+
+  /* ============ FUT-style card frame ============ */
+  .fut{
+    width:520px;height:780px;position:relative;
+    background:
+      linear-gradient(135deg, rgba(255,184,0,.18), rgba(0,0,0,0) 35%),
+      linear-gradient(180deg, #1a1408 0%, #0a0f1c 50%, #1a1408 100%);
+    border:3px solid var(--gold);
+    box-shadow:0 0 60px rgba(255,184,0,.25), inset 0 0 40px rgba(0,0,0,.6);
+    clip-path:polygon(30px 0,100% 0,100% calc(100% - 30px),calc(100% - 30px) 100%,0 100%,0 30px);
+    padding:36px 32px;display:flex;flex-direction:column
+  }
+  .fut::before{
+    content:"";position:absolute;inset:14px;border:1px solid rgba(255,184,0,.3);
+    clip-path:polygon(20px 0,100% 0,100% calc(100% - 20px),calc(100% - 20px) 100%,0 100%,0 20px);
+    pointer-events:none
+  }
+  .fut-head{display:flex;justify-content:space-between;align-items:flex-start}
+  .fut-ovr{display:flex;flex-direction:column;align-items:center}
+  .fut-ovr .num{font-size:96px;line-height:1;color:var(--gold);text-shadow:0 0 24px rgba(255,184,0,.5)}
+  .fut-ovr .pos{font-size:24px;color:var(--gold);letter-spacing:8px;margin-top:-8px}
+  .fut-flag{display:flex;flex-direction:column;align-items:center;gap:6px}
+  .fut-flag .country{width:64px;height:42px;background:linear-gradient(180deg,#2453a5 33%, #fff 33% 66%, #2453a5 66%);border:1px solid #000}
+  .fut-flag .league{width:50px;height:50px;background:radial-gradient(circle,var(--gold),var(--gold-lo));border-radius:999px}
+
+  .fut-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+  .fut-body .crest-big{
+    width:280px;height:280px;border-radius:999px;
+    background:conic-gradient(from 0deg, #c81e2c 0 25%, #1746a6 0 50%, #c81e2c 0 75%, #1746a6 0 100%);
+    display:flex;align-items:center;justify-content:center;color:#fff;font-size:32px;
+    box-shadow:inset 0 0 40px rgba(0,0,0,.5),0 10px 30px rgba(0,0,0,.6)
+  }
+  .fut-body .name{font-size:48px;color:var(--text);letter-spacing:6px;margin-top:12px;text-align:center}
+
+  .fut-stats{display:grid;grid-template-columns:1fr 1fr;column-gap:24px;row-gap:6px;padding:0 18px}
+  .fut-stat{display:flex;align-items:baseline;justify-content:space-between;border-bottom:1px solid rgba(255,184,0,.2);padding-bottom:4px}
+  .fut-stat .v{font-size:32px;color:var(--gold);min-width:60px;text-align:right}
+  .fut-stat .k{font-size:20px;color:var(--text-dim);letter-spacing:4px}
+
+  /* ============ TEAM SELECT (opcao2) ============ */
+  .ts2-top{position:absolute;top:24px;left:60px;right:60px;display:flex;align-items:center;justify-content:space-between;height:90px}
+  .ts2-step{display:flex;align-items:center;gap:12px}
+  .step-dot{width:14px;height:14px;background:var(--text-muted)}
+  .step-dot.active{background:var(--gold);box-shadow:0 0 12px var(--gold)}
+  .step-bar{width:60px;height:2px;background:var(--text-muted)}
+  .step-bar.active{background:var(--gold)}
+
+  .ts2-arena{position:absolute;top:140px;left:0;right:0;bottom:180px;display:flex;align-items:center;justify-content:center;gap:48px}
+  .ts2-side{display:flex;flex-direction:column;gap:18px}
+  .ts2-mini{
+    width:160px;height:240px;
+    background:linear-gradient(180deg,#1a1408,#0a0f1c);
+    border:2px solid var(--stroke);
+    clip-path:polygon(16px 0,100% 0,100% calc(100% - 16px),calc(100% - 16px) 100%,0 100%,0 16px);
+    display:flex;flex-direction:column;align-items:center;padding:14px;gap:6px;opacity:.55
+  }
+  .ts2-mini.dimmer{opacity:.3}
+  .ts2-mini .mc{width:90px;height:90px;border-radius:999px;background:conic-gradient(from 0deg,#1746a6,#c81e2c)}
+  .ts2-mini .mn{font-size:14px;color:var(--text-dim);letter-spacing:2px;text-align:center}
+  .ts2-mini .mr{font-size:32px;color:var(--gold);line-height:1}
+
+  .ts2-bottom{position:absolute;bottom:36px;left:0;right:0;display:flex;align-items:center;justify-content:center;gap:60px}
+  .form-block{display:flex;align-items:center;gap:14px}
+  .form-block .lbl{font-size:42px;color:var(--gold);letter-spacing:10px;min-width:280px;text-align:center}
+
+  /* ============ PROFILE (opcao2) ============ */
+  .pf2-top{position:absolute;top:24px;left:60px;right:60px;display:flex;align-items:center;justify-content:space-between;height:90px}
+  .pf2-body{position:absolute;top:140px;left:60px;right:60px;bottom:140px;display:flex;gap:36px;align-items:stretch}
+  .pf2-left{display:flex;align-items:center}
+  .pf2-right{flex:1;display:flex;flex-direction:column;gap:18px}
+
+  .coach-card{width:520px;height:780px;position:relative}
+  .coach-photo{
+    width:100%;height:380px;
+    background:radial-gradient(circle at 50% 30%,#c4a07a,#704a30 60%,#1a1106);
+    border-bottom:2px solid var(--stroke);
+    display:flex;align-items:flex-end;justify-content:center;padding-bottom:18px;color:var(--text);font-size:22px
+  }
+
+  .pf2-section{
+    background:linear-gradient(180deg, rgba(10,15,28,.85), rgba(10,15,28,.6));
+    border:2px solid var(--stroke);
+    clip-path:polygon(20px 0,100% 0,100% calc(100% - 20px),calc(100% - 20px) 100%,0 100%,0 20px);
+    padding:24px 28px;
+  }
+
+  .pf2-stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .pf2-stat-pill{
+    background:rgba(0,0,0,.55);border:1px solid var(--stroke);padding:18px 12px;
+    display:flex;flex-direction:column;align-items:center;
+    clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px)
+  }
+  .pf2-stat-pill .lbl{font-size:18px;color:var(--text-dim);letter-spacing:4px}
+  .pf2-stat-pill .num{font-size:62px;color:var(--gold);line-height:1;margin-top:4px}
+
+  .achievements{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-top:14px}
+  .ach{
+    aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+    background:#0a0f1c;border:2px solid var(--stroke);font-size:32px;color:var(--gold);
+    clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)
+  }
+  .ach.locked{color:var(--text-muted);border-color:rgba(244,241,232,.18)}
+  .ach.silver{color:#cdd2dd;border-color:#8a96b3}
+  .ach.bronze{color:#cd7f32;border-color:#7a4a1a}
+
+  .form-strip{display:flex;gap:10px;margin-top:14px}
+  .form-square{
+    width:60px;height:60px;display:flex;align-items:center;justify-content:center;
+    font-size:28px;color:#000;
+    clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px)
+  }
+  .form-square.W{background:var(--green)}
+  .form-square.D{background:var(--gold)}
+  .form-square.L{background:var(--crimson)}
+
+  /* ============ MATCHMAKING (opcao2) ============ */
+  .mm2-bg{position:absolute;inset:0;overflow:hidden}
+  .mm2-bg::before{
+    content:"";position:absolute;left:-10%;top:-10%;width:70%;height:140%;
+    background:linear-gradient(135deg, rgba(92,182,255,.18), rgba(92,182,255,0));
+    transform:skewX(-12deg)
+  }
+  .mm2-bg::after{
+    content:"";position:absolute;right:-10%;top:-10%;width:70%;height:140%;
+    background:linear-gradient(225deg, rgba(229,34,60,.22), rgba(229,34,60,0));
+    transform:skewX(-12deg)
+  }
+
+  .mm2-top{position:absolute;top:36px;left:0;right:0;display:flex;flex-direction:column;align-items:center;gap:6px}
+  .mm2-title{font-size:42px;letter-spacing:10px;color:var(--text)}
+  .mm2-timer{
+    margin-top:8px;font-size:120px;line-height:1;color:var(--gold);letter-spacing:14px;
+    text-shadow:0 0 40px rgba(255,184,0,.5)
+  }
+  .mm2-status{font-size:22px;color:var(--text-dim);letter-spacing:6px}
+
+  .mm2-arena{position:absolute;top:340px;left:0;right:0;bottom:200px;display:flex;align-items:center;justify-content:center}
+  .fighter{
+    width:520px;height:620px;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:30px;
+    background:linear-gradient(180deg, transparent 30%, rgba(0,0,0,.85) 100%);
+    border:3px solid;
+    clip-path:polygon(40px 0,100% 0,100% calc(100% - 40px),calc(100% - 40px) 100%,0 100%,0 40px)
+  }
+  .fighter.left{border-color:var(--ice);box-shadow:0 0 60px rgba(92,182,255,.4)}
+  .fighter.right{border-color:var(--crimson);box-shadow:0 0 60px rgba(229,34,60,.4)}
+  .fighter .photo{position:absolute;inset:0;background:radial-gradient(circle at 50% 30%,#c4a07a,#704a30 60%,#1a1106);z-index:0;
+    clip-path:polygon(40px 0,100% 0,100% calc(100% - 40px),calc(100% - 40px) 100%,0 100%,0 40px)}
+  .fighter .photo.unknown{background:linear-gradient(180deg,#1a1408,#0a0f1c);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.25);font-size:240px}
+  .fighter .info{position:relative;z-index:2;text-align:center}
+  .fighter .info .nm{font-size:62px;letter-spacing:8px}
+  .fighter.left .info .nm{color:var(--ice)}
+  .fighter.right .info .nm{color:var(--crimson-hi)}
+  .fighter .info .mt{margin-top:6px;font-size:24px;color:var(--text-dim);letter-spacing:6px}
+
+  .mm2-vs{
+    width:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 -40px;z-index:3
+  }
+  .mm2-vs .vs{font-size:220px;line-height:1;color:var(--gold);text-shadow:0 0 40px rgba(255,184,0,.6),0 0 80px rgba(229,34,60,.4)}
+  .mm2-vs .pulse{width:140px;height:6px;background:var(--gold);margin-top:8px;animation:pulse 1.4s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:.3;transform:scaleX(.4)}50%{opacity:1;transform:scaleX(1)}}
+
+  .compare{position:absolute;left:0;right:0;bottom:140px;display:flex;justify-content:center;gap:24px}
+  .compare .col{
+    background:rgba(0,0,0,.55);border:1px solid var(--stroke);padding:14px 28px;display:flex;align-items:center;gap:24px;
+    clip-path:polygon(14px 0,100% 0,100% calc(100% - 14px),calc(100% - 14px) 100%,0 100%,0 14px)
+  }
+  .compare .col .v{font-size:30px;color:var(--gold);min-width:60px;text-align:center}
+  .compare .col .k{font-size:18px;color:var(--text-dim);letter-spacing:4px}
+  .compare .col .vR{color:var(--crimson-hi)}
+  .compare .col .vL{color:var(--ice)}
+
+  .mm2-bottom{position:absolute;bottom:36px;left:0;right:0;display:flex;justify-content:center}
+  .scenes>section{display:none}
+  .scenes>section.active{display:block}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>ROYAL TABLE SOCCER &mdash; OPCAO 2 (FUT PREMIUM)</h1>
+  <button class="tab active" data-target="ts2">Selecao de Time</button>
+  <button class="tab" data-target="pf2">Profile</button>
+  <button class="tab" data-target="mm2">Matchmaking</button>
+  <div class="hint">Vire o celular na horizontal para melhor visualizacao</div>
+</header>
+
+<div class="viewport">
+  <div class="stage scenes">
+
+    <!-- ====== TEAM SELECT ====== -->
+    <section id="ts2" class="scene active">
+      <div class="ts2-top">
+        <div class="chev">&lt;</div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="crumb">CAMPEONATO &raquo; LIGA &raquo; <b>TIME</b></div>
+          <div class="ts2-step">
+            <div class="step-dot"></div>
+            <div class="step-bar"></div>
+            <div class="step-dot"></div>
+            <div class="step-bar active"></div>
+            <div class="step-dot active"></div>
+          </div>
+        </div>
+        <div class="chip">PRIMERA DIVISION</div>
+      </div>
+
+      <div class="ts2-arena">
+        <div class="ts2-side">
+          <div class="ts2-mini dimmer"><div class="mc"></div><div class="mr">71</div><div class="mn">RIVER PLATE</div></div>
+          <div class="ts2-mini"><div class="mc"></div><div class="mr">75</div><div class="mn">BOCA JRS</div></div>
+        </div>
+
+        <div class="fut">
+          <div class="fut-head">
+            <div class="fut-ovr"><div class="num">82</div><div class="pos">CLUBE</div></div>
+            <div class="fut-flag"><div class="country"></div><div class="league"></div></div>
+          </div>
+          <div class="fut-body">
+            <div class="crest-big">ARSENAL</div>
+            <div class="name">ARSENAL SARANDI</div>
+          </div>
+          <div class="fut-stats">
+            <div class="fut-stat"><span class="v">84</span><span class="k">ATA</span></div>
+            <div class="fut-stat"><span class="v">86</span><span class="k">RIT</span></div>
+            <div class="fut-stat"><span class="v">78</span><span class="k">MEI</span></div>
+            <div class="fut-stat"><span class="v">79</span><span class="k">RES</span></div>
+            <div class="fut-stat"><span class="v">80</span><span class="k">DEF</span></div>
+            <div class="fut-stat"><span class="v">85</span><span class="k">MOR</span></div>
+          </div>
+        </div>
+
+        <div class="ts2-side">
+          <div class="ts2-mini"><div class="mc"></div><div class="mr">77</div><div class="mn">RACING CLUB</div></div>
+          <div class="ts2-mini dimmer"><div class="mc"></div><div class="mr">73</div><div class="mn">SAN LORENZO</div></div>
+        </div>
+      </div>
+
+      <div class="ts2-bottom">
+        <div class="chev">&lt;</div>
+        <div class="form-block">
+          <div class="chev">&lt;</div>
+          <div class="lbl">1 - 2 - 1 - 1</div>
+          <div class="chev">&gt;</div>
+        </div>
+        <div class="cta ghost">VOLTAR</div>
+        <div class="cta">CONFIRMAR</div>
+        <div class="chev">&gt;</div>
+      </div>
+    </section>
+
+    <!-- ====== PROFILE ====== -->
+    <section id="pf2" class="scene">
+      <div class="pf2-top">
+        <div class="chev">&lt;</div>
+        <div class="eyebrow">PERFIL DO TECNICO</div>
+        <div class="chip">RANK 34 &middot; BRONZE I</div>
+      </div>
+
+      <div class="pf2-body">
+        <div class="pf2-left">
+          <div class="fut coach-card">
+            <div class="fut-head">
+              <div class="fut-ovr"><div class="num">68</div><div class="pos">TEC</div></div>
+              <div class="fut-flag"><div class="country"></div><div class="league"></div></div>
+            </div>
+            <div class="fut-body">
+              <div class="coach-photo">MAFIAZOUK</div>
+              <div class="name" style="margin-top:18px">MAFIAZOUK</div>
+            </div>
+            <div class="fut-stats">
+              <div class="fut-stat"><span class="v">1</span><span class="k">LV</span></div>
+              <div class="fut-stat"><span class="v">12</span><span class="k">GOL</span></div>
+              <div class="fut-stat"><span class="v">0</span><span class="k">VIT</span></div>
+              <div class="fut-stat"><span class="v">3</span><span class="k">TRO</span></div>
+              <div class="fut-stat"><span class="v">0</span><span class="k">STR</span></div>
+              <div class="fut-stat"><span class="v">120</span><span class="k">XP</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pf2-right">
+          <div class="pf2-section">
+            <div class="eyebrow" style="font-size:18px">CARREIRA</div>
+            <div class="pf2-stats-grid" style="margin-top:14px">
+              <div class="pf2-stat-pill"><div class="num">0</div><div class="lbl">ONLINE WINS</div></div>
+              <div class="pf2-stat-pill"><div class="num">0</div><div class="lbl">STAR LEAGUE</div></div>
+              <div class="pf2-stat-pill"><div class="num">3</div><div class="lbl">TROFEUS</div></div>
+              <div class="pf2-stat-pill"><div class="num">12</div><div class="lbl">GOLS</div></div>
+            </div>
+          </div>
+
+          <div class="pf2-section">
+            <div class="eyebrow" style="font-size:18px">CONQUISTAS</div>
+            <div class="achievements">
+              <div class="ach">&#9733;</div>
+              <div class="ach silver">&#9881;</div>
+              <div class="ach bronze">&#9913;</div>
+              <div class="ach locked">&#9728;</div>
+              <div class="ach locked">&#9876;</div>
+              <div class="ach locked">&#9883;</div>
+            </div>
+          </div>
+
+          <div class="pf2-section">
+            <div class="eyebrow" style="font-size:18px">ULTIMAS PARTIDAS</div>
+            <div class="form-strip">
+              <div class="form-square W">V</div>
+              <div class="form-square L">D</div>
+              <div class="form-square W">V</div>
+              <div class="form-square D">E</div>
+              <div class="form-square W">V</div>
+              <div style="display:flex;align-items:center;margin-left:18px;color:var(--text-dim);font-size:20px;letter-spacing:4px">3V &middot; 1E &middot; 1D</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mm2-bottom">
+        <div class="cta ghost" style="margin-right:24px">EDITAR NOME</div>
+        <div class="cta">COMPARTILHAR</div>
+      </div>
+    </section>
+
+    <!-- ====== MATCHMAKING ====== -->
+    <section id="mm2" class="scene">
+      <div class="mm2-bg"></div>
+
+      <div class="mm2-top">
+        <div class="eyebrow">MATCHMAKING</div>
+        <div class="mm2-title">BUSCANDO ADVERSARIO REAL</div>
+        <div class="mm2-timer" id="mm2Timer">00 : 28</div>
+        <div class="mm2-status" id="mm2Status">CALIBRANDO HABILIDADE...</div>
+      </div>
+
+      <div class="mm2-arena">
+        <div class="fighter left">
+          <div class="photo"></div>
+          <div class="info">
+            <div class="nm">MAFIAZOUK</div>
+            <div class="mt">LV 1 &middot; RANK 34</div>
+          </div>
+        </div>
+
+        <div class="mm2-vs">
+          <div class="vs">VS</div>
+          <div class="pulse"></div>
+        </div>
+
+        <div class="fighter right">
+          <div class="photo unknown">?</div>
+          <div class="info">
+            <div class="nm">PROCURANDO</div>
+            <div class="mt">&mdash;</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="compare">
+        <div class="col"><span class="v vL">68</span><span class="k">OVR</span><span class="v">VS</span><span class="k">OVR</span><span class="v vR">??</span></div>
+        <div class="col"><span class="v vL">12</span><span class="k">VITORIAS</span><span class="v">VS</span><span class="k">VITORIAS</span><span class="v vR">??</span></div>
+        <div class="col"><span class="v vL">3V</span><span class="k">FORMA</span><span class="v">VS</span><span class="k">FORMA</span><span class="v vR">??</span></div>
+      </div>
+
+      <div class="mm2-bottom">
+        <div class="cta danger">CANCELAR BUSCA</div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.tab').forEach(t=>{
+    t.addEventListener('click',()=>{
+      document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+      document.querySelectorAll('.scene').forEach(x=>x.classList.remove('active'));
+      t.classList.add('active');
+      document.getElementById(t.dataset.target).classList.add('active');
+    });
+  });
+  function fit(){
+    const vp=document.querySelector('.viewport');
+    const stage=document.querySelector('.stage');
+    stage.style.transform=`scale(${vp.clientWidth/1920})`;
+  }
+  window.addEventListener('resize',fit);
+  window.addEventListener('orientationchange',()=>setTimeout(fit,200));
+  fit();
+
+  let sec=28;
+  const states=["CALIBRANDO HABILIDADE...","ANALISANDO RANK...","CONECTANDO REGIAO...","FINALIZANDO PAREAMENTO..."];
+  let si=0;
+  setInterval(()=>{
+    sec++;
+    document.getElementById('mm2Timer').textContent=`${String(Math.floor(sec/60)).padStart(2,'0')} : ${String(sec%60).padStart(2,'0')}`;
+    if(sec%4===0){si=(si+1)%states.length;document.getElementById('mm2Status').textContent=states[si]}
+  },1000);
+</script>
+</body>
+</html>
