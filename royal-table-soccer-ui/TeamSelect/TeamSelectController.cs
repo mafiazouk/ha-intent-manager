@@ -29,7 +29,6 @@ namespace RoyalTableSoccer.UI
         [SerializeField] private List<TeamData> teams = new();
         [SerializeField] private List<FormationData> formations = new();
 
-        [Header("Events (hook in inspector or via code)")]
         public event Action<TeamData, FormationData> Confirmed;
         public event Action Cancelled;
 
