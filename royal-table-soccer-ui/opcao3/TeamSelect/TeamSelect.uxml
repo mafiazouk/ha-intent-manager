@@ -1,0 +1,80 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/royal-table-soccer-ui/opcao3/Theme/Theme.uss" />
+    <Style src="project://database/Assets/UI/royal-table-soccer-ui/opcao3/TeamSelect/TeamSelect.uss" />
+
+    <ui:VisualElement name="root" class="rts3-root rts3-stage">
+        <ui:VisualElement class="rts3-stage-overlay" />
+        <ui:VisualElement class="rts3-grid" />
+        <ui:VisualElement class="rts3-horizon" />
+        <ui:VisualElement class="rts3-scanlines" />
+
+        <!-- Top -->
+        <ui:VisualElement class="ts3-top">
+            <ui:Button name="btn-back" class="rts3-chev" text="&lt;" />
+            <ui:VisualElement class="ts3-top-center">
+                <ui:Label class="rts3-eyebrow" text="CAMPEONATO" />
+                <ui:Label class="rts3-subtitle" text="ESCOLHA SEU TIME" />
+            </ui:VisualElement>
+            <ui:VisualElement class="rts3-chip"><ui:Label name="lbl-league" text="LIGA: PRIMERA" /></ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- Body -->
+        <ui:VisualElement class="ts3-body">
+
+            <!-- Team pane -->
+            <ui:VisualElement class="ts3-team rts3-card">
+                <ui:Label name="lbl-team-name" class="ts3-team-name" text="ARSENAL SARANDI" />
+
+                <ui:VisualElement class="ts3-carousel">
+                    <ui:Button name="btn-prev-team" class="rts3-chev rts3-chev-magenta" text="&lt;" />
+                    <ui:VisualElement class="rts3-hex-outer">
+                        <ui:VisualElement class="rts3-hex-inner">
+                            <ui:VisualElement name="team-crest" class="ts3-crest" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:Button name="btn-next-team" class="rts3-chev rts3-chev-magenta" text="&gt;" />
+                </ui:VisualElement>
+
+                <ui:VisualElement class="ts3-stats">
+                    <ui:VisualElement class="ts3-stat">
+                        <ui:Label class="ts3-stat-lbl" text="ATAQUE" />
+                        <ui:VisualElement class="ts3-bar"><ui:VisualElement name="stat-atk" class="ts3-bar-fill" /></ui:VisualElement>
+                        <ui:Label name="stat-atk-val" class="ts3-stat-val" text="84" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="ts3-stat">
+                        <ui:Label class="ts3-stat-lbl" text="MEIO" />
+                        <ui:VisualElement class="ts3-bar"><ui:VisualElement name="stat-mid" class="ts3-bar-fill" /></ui:VisualElement>
+                        <ui:Label name="stat-mid-val" class="ts3-stat-val" text="78" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="ts3-stat">
+                        <ui:Label class="ts3-stat-lbl" text="DEFESA" />
+                        <ui:VisualElement class="ts3-bar"><ui:VisualElement name="stat-def" class="ts3-bar-fill" /></ui:VisualElement>
+                        <ui:Label name="stat-def-val" class="ts3-stat-val" text="80" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+            <!-- Formation pane -->
+            <ui:VisualElement class="ts3-form rts3-card">
+                <ui:Label class="rts3-eyebrow" text="FORMACAO" />
+                <ui:VisualElement name="pitch" class="ts3-pitch">
+                    <ui:VisualElement class="ts3-pitch-line"><ui:VisualElement class="ts3-pitch-marker" /></ui:VisualElement>
+                    <ui:VisualElement class="ts3-pitch-line"><ui:VisualElement class="ts3-pitch-marker" /><ui:VisualElement class="ts3-pitch-marker" /></ui:VisualElement>
+                    <ui:VisualElement class="ts3-pitch-line"><ui:VisualElement class="ts3-pitch-marker" /></ui:VisualElement>
+                    <ui:VisualElement class="ts3-pitch-line"><ui:VisualElement class="ts3-pitch-marker" /></ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement class="ts3-form-switch">
+                    <ui:Button name="btn-prev-form" class="rts3-chev ts3-form-nav" text="&lt;" />
+                    <ui:Label name="lbl-formation" class="ts3-form-lbl" text="1 - 2 - 1 - 1" />
+                    <ui:Button name="btn-next-form" class="rts3-chev ts3-form-nav" text="&gt;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- Bottom -->
+        <ui:VisualElement class="ts3-bottom">
+            <ui:Button name="btn-cancel" class="rts3-neon-btn" text="VOLTAR" />
+            <ui:Button name="btn-confirm" class="rts3-neon-btn rts3-neon-btn-solid" text="CONFIRMAR" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

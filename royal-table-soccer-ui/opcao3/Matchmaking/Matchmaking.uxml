@@ -1,0 +1,64 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/royal-table-soccer-ui/opcao3/Theme/Theme.uss" />
+    <Style src="project://database/Assets/UI/royal-table-soccer-ui/opcao3/Matchmaking/Matchmaking.uss" />
+
+    <ui:VisualElement name="root" class="rts3-root rts3-stage">
+        <ui:VisualElement class="rts3-stage-overlay" />
+        <ui:VisualElement class="rts3-grid" />
+        <ui:VisualElement class="rts3-horizon" />
+        <ui:VisualElement class="rts3-scanlines" />
+
+        <!-- Header -->
+        <ui:VisualElement class="mm3-header">
+            <ui:Label class="rts3-eyebrow" text="MATCHMAKING" />
+            <ui:Label class="mm3-title" text="BUSCANDO ADVERSARIO REAL" />
+            <ui:Label name="lbl-timer" class="mm3-timer" text="00 : 28" />
+        </ui:VisualElement>
+
+        <!-- Arena -->
+        <ui:VisualElement class="mm3-arena">
+
+            <!-- Local fighter -->
+            <ui:VisualElement class="mm3-side mm3-side-left">
+                <ui:VisualElement class="mm3-portrait">
+                    <ui:VisualElement name="ring-left" class="mm3-ring mm3-ring-left" />
+                    <ui:VisualElement class="mm3-frame">
+                        <ui:VisualElement name="left-photo" class="mm3-photo" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:Label name="lbl-left-name" class="mm3-name mm3-name-left" text="MAFIAZOUK" />
+                <ui:Label name="lbl-left-meta" class="mm3-meta" text="LV 1 - RANK 34" />
+            </ui:VisualElement>
+
+            <!-- VS -->
+            <ui:VisualElement class="mm3-vs">
+                <ui:Label class="mm3-vs-text" text="VS" />
+                <ui:VisualElement name="vs-pulse" class="mm3-vs-pulse" />
+            </ui:VisualElement>
+
+            <!-- Opponent -->
+            <ui:VisualElement class="mm3-side mm3-side-right">
+                <ui:VisualElement class="mm3-portrait">
+                    <ui:VisualElement name="ring-right" class="mm3-ring mm3-ring-right" />
+                    <ui:VisualElement class="mm3-frame">
+                        <ui:VisualElement name="right-photo" class="mm3-photo mm3-photo-unknown">
+                            <ui:Label name="lbl-question" class="mm3-question" text="?" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:Label name="lbl-right-name" class="mm3-name mm3-name-right" text="PROCURANDO" />
+                <ui:Label name="lbl-right-meta" class="mm3-meta" text="-" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- Footer -->
+        <ui:VisualElement class="mm3-footer">
+            <ui:Label class="mm3-fairplay" text="RESPEITE O ADVERSARIO NA PARTIDA ONLINE" />
+            <ui:VisualElement class="mm3-tip-row">
+                <ui:VisualElement name="tip-dot" class="mm3-tip-dot" />
+                <ui:Label name="lbl-tip" class="mm3-tip" text="DICA: ABASTECA SEU TIME ANTES DAS PARTIDAS RANKEADAS" />
+            </ui:VisualElement>
+            <ui:Button name="btn-cancel" class="rts3-neon-btn rts3-neon-btn-danger mm3-cancel" text="CANCELAR BUSCA" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

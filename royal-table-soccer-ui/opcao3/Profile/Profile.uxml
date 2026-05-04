@@ -1,0 +1,88 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/royal-table-soccer-ui/opcao3/Theme/Theme.uss" />
+    <Style src="project://database/Assets/UI/royal-table-soccer-ui/opcao3/Profile/Profile.uss" />
+
+    <ui:VisualElement name="root" class="rts3-root rts3-stage">
+        <ui:VisualElement class="rts3-stage-overlay" />
+        <ui:VisualElement class="rts3-grid" />
+        <ui:VisualElement class="rts3-horizon" />
+        <ui:VisualElement class="rts3-scanlines" />
+
+        <!-- Top -->
+        <ui:VisualElement class="pf3-top">
+            <ui:Button name="btn-back" class="rts3-chev" text="&lt;" />
+            <ui:Label class="rts3-eyebrow" text="PERFIL DO JOGADOR" />
+            <ui:VisualElement class="rts3-chip"><ui:Label name="lbl-rank-chip" text="RANK 34" /></ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- Body -->
+        <ui:VisualElement class="pf3-body">
+
+            <!-- Hero -->
+            <ui:VisualElement class="pf3-hero rts3-card">
+                <ui:VisualElement class="rts3-hex-outer">
+                    <ui:VisualElement class="rts3-hex-inner">
+                        <ui:VisualElement name="avatar" class="pf3-avatar" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+
+                <ui:VisualElement class="pf3-cam-row">
+                    <ui:Button name="btn-pick-photo" class="pf3-cam-pill" text="GALERIA" />
+                    <ui:Button name="btn-take-photo" class="pf3-cam-pill" text="CAMERA" />
+                </ui:VisualElement>
+
+                <ui:Label name="lbl-name" class="pf3-name" text="MAFIAZOUK" />
+
+                <ui:VisualElement class="pf3-level-row">
+                    <ui:Label name="lbl-level" class="pf3-level" text="LEVEL 1" />
+                    <ui:Label class="pf3-star" text="*" />
+                </ui:VisualElement>
+
+                <ui:VisualElement class="pf3-xp-row">
+                    <ui:VisualElement class="pf3-xp-bar"><ui:VisualElement name="xp-fill" class="pf3-xp-fill" /></ui:VisualElement>
+                    <ui:Label name="lbl-xp" class="pf3-xp-text" text="180 / 1000 XP" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+            <!-- Right column -->
+            <ui:VisualElement class="pf3-right">
+                <ui:VisualElement class="pf3-grid">
+                    <ui:VisualElement class="pf3-stat pf3-stat-cyan">
+                        <ui:Label class="pf3-stat-lbl" text="ONLINE WINS" />
+                        <ui:Label name="lbl-online-wins" class="pf3-stat-num" text="0" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="pf3-stat pf3-stat-magenta">
+                        <ui:Label class="pf3-stat-lbl" text="STAR LEAGUE" />
+                        <ui:Label name="lbl-star-wins" class="pf3-stat-num" text="0" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="pf3-stat pf3-stat-green">
+                        <ui:Label class="pf3-stat-lbl" text="TROFEUS" />
+                        <ui:Label name="lbl-trophies" class="pf3-stat-num" text="3" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="pf3-stat pf3-stat-purple">
+                        <ui:Label class="pf3-stat-lbl" text="GOLS" />
+                        <ui:Label name="lbl-goals" class="pf3-stat-num" text="12" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+
+                <ui:VisualElement class="pf3-badge rts3-card">
+                    <ui:Label class="rts3-eyebrow" text="DIVISAO" />
+                    <ui:VisualElement class="pf3-badge-row">
+                        <ui:VisualElement name="badge" class="pf3-badge-hex" />
+                        <ui:VisualElement class="pf3-badge-text">
+                            <ui:Label name="lbl-division" class="pf3-division" text="BRONZE I" />
+                            <ui:Label name="lbl-division-sub" class="pf3-division-sub" text="Vença 3 partidas para promover" />
+                            <ui:VisualElement class="pf3-promo-bar"><ui:VisualElement name="promo-fill" class="pf3-promo-fill" /></ui:VisualElement>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- Bottom -->
+        <ui:VisualElement class="pf3-bottom">
+            <ui:Button name="btn-edit-name" class="rts3-neon-btn" text="EDITAR NOME" />
+            <ui:Button name="btn-share" class="rts3-neon-btn rts3-neon-btn-magenta" text="COMPARTILHAR" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

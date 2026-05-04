@@ -1,0 +1,188 @@
+/* ===== Matchmaking (opcao3 — Neon Arena) ===== */
+
+.mm3-header {
+    position: absolute;
+    top: 36px; left: 0; right: 0;
+    align-items: center;
+}
+
+.mm3-title {
+    font-size: 54px;
+    color: rgb(255, 255, 255);
+    text-shadow: 0 0 24px rgb(255, 45, 200), 0 0 48px rgb(155, 91, 255);
+    letter-spacing: 10px;
+    margin-top: 6px;
+}
+
+.mm3-timer {
+    margin-top: 6px;
+    font-size: 120px;
+    color: rgb(0, 245, 255);
+    text-shadow: 0 0 30px rgb(0, 245, 255), 0 0 60px rgb(255, 45, 200);
+    letter-spacing: 14px;
+}
+
+/* ----- Arena ----- */
+.mm3-arena {
+    position: absolute;
+    top: 340px; left: 0; right: 0;
+    bottom: 240px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.mm3-side {
+    width: 32%;
+    align-items: center;
+}
+
+.mm3-side-left  { margin-right: 18px; }
+.mm3-side-right { margin-left: 18px; }
+
+.mm3-portrait {
+    width: 380px;
+    height: 430px;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Hex ring (sprite mask). The C# script rotates it. */
+.mm3-ring {
+    position: absolute;
+    width: 404px;
+    height: 454px;
+    background-image: url("project://database/Assets/Sprites/UI/hex_ring_cyan.png");
+    -unity-background-scale-mode: scale-to-fit;
+    rotate: 0deg;
+}
+
+.mm3-ring-right {
+    background-image: url("project://database/Assets/Sprites/UI/hex_ring_magenta.png");
+}
+
+/* Hex photo frame. Inner is filled with the photo. */
+.mm3-frame {
+    width: 380px;
+    height: 430px;
+    background-image: url("project://database/Assets/Sprites/UI/hex_inner.png");
+    -unity-background-scale-mode: scale-to-fit;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.mm3-photo {
+    width: 96%;
+    height: 96%;
+    background-image: url("project://database/Assets/Sprites/UI/avatar_placeholder.png");
+    -unity-background-scale-mode: scale-and-crop;
+}
+
+.mm3-photo-unknown {
+    background-image: none;
+    background-color: rgb(10, 5, 38);
+    align-items: center;
+    justify-content: center;
+}
+
+.mm3-question {
+    font-size: 200px;
+    color: rgba(220, 210, 255, 0.4);
+    text-shadow: 0 0 24px rgb(155, 91, 255);
+}
+
+.mm3-name {
+    margin-top: 28px;
+    font-size: 60px;
+    letter-spacing: 8px;
+}
+
+.mm3-name-left {
+    color: rgb(0, 245, 255);
+    text-shadow: 0 0 18px rgb(0, 245, 255);
+}
+
+.mm3-name-right {
+    color: rgb(255, 45, 200);
+    text-shadow: 0 0 18px rgb(255, 45, 200);
+}
+
+.mm3-meta {
+    margin-top: 4px;
+    font-size: 24px;
+    color: rgba(220, 210, 255, 0.7);
+    letter-spacing: 6px;
+}
+
+/* VS center */
+.mm3-vs {
+    width: 240px;
+    align-items: center;
+    justify-content: center;
+}
+
+.mm3-vs-text {
+    font-size: 200px;
+    color: rgb(255, 45, 200);
+    text-shadow: 0 0 30px rgb(255, 45, 200), 0 0 60px rgb(0, 245, 255);
+    letter-spacing: 4px;
+    -unity-text-align: middle-center;
+}
+
+.mm3-vs-pulse {
+    width: 160px;
+    height: 8px;
+    margin-top: 14px;
+    background-color: rgb(255, 45, 200);
+    background-image: url("project://database/Assets/Sprites/UI/bar_gradient.png");
+    -unity-background-scale-mode: stretch-to-fill;
+    border-top-left-radius: 999px;
+    border-top-right-radius: 999px;
+    border-bottom-left-radius: 999px;
+    border-bottom-right-radius: 999px;
+}
+
+/* Footer */
+.mm3-footer {
+    position: absolute;
+    bottom: 36px; left: 0; right: 0;
+    align-items: center;
+}
+
+.mm3-fairplay {
+    font-size: 24px;
+    color: rgba(220, 210, 255, 0.7);
+    letter-spacing: 6px;
+}
+
+.mm3-tip-row {
+    margin-top: 12px;
+    flex-direction: row;
+    align-items: center;
+}
+
+.mm3-tip-dot {
+    width: 14px;
+    height: 14px;
+    background-color: rgb(0, 245, 255);
+    border-top-left-radius: 999px;
+    border-top-right-radius: 999px;
+    border-bottom-left-radius: 999px;
+    border-bottom-right-radius: 999px;
+    margin-right: 14px;
+    scale: 1 1;
+    transition-property: scale, opacity;
+    transition-duration: 0ms;
+}
+
+.mm3-tip {
+    font-size: 22px;
+    color: rgba(220, 210, 255, 0.7);
+    letter-spacing: 4px;
+}
+
+.mm3-cancel {
+    margin-top: 12px;
+    min-width: 360px;
+}

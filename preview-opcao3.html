@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Royal Table Soccer — UI Preview (Opcao 3: Neon Arena)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-deep:#06031a; --bg-mid:#0e0838; --bg-card:rgba(28,16,80,.78); --bg-glass:rgba(28,16,80,.4);
+    --cyan:#00F5FF; --magenta:#FF2DC8; --purple:#9B5BFF; --pink:#FF66E2; --blue:#3F7BFF; --green:#39FF9C;
+    --text:#ffffff; --text-dim:rgba(220,210,255,.7); --text-muted:rgba(220,210,255,.4);
+    --neon-soft:rgba(155,91,255,.55);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'Lilita One',system-ui,sans-serif;letter-spacing:1px}
+  html,body{background:#000;color:var(--text);min-height:100vh;overflow-x:hidden}
+  body{display:flex;flex-direction:column;align-items:center}
+
+  header{
+    position:sticky;top:0;z-index:10;width:100%;padding:10px 12px;
+    background:linear-gradient(#06031a,#0e0838);border-bottom:1px solid var(--neon-soft);
+    display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;
+  }
+  header h1{
+    flex-basis:100%;text-align:center;font-size:14px;letter-spacing:6px;margin-bottom:6px;
+    background:linear-gradient(90deg,var(--cyan),var(--magenta),var(--purple));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    text-shadow:0 0 14px rgba(255,45,200,.35)
+  }
+  .tab{
+    background:transparent;color:#fff;border:2px solid var(--cyan);border-radius:999px;
+    padding:8px 18px;font-size:13px;letter-spacing:2px;cursor:pointer;
+    box-shadow:0 0 10px rgba(0,245,255,.35), inset 0 0 6px rgba(0,245,255,.25)
+  }
+  .tab.active{border-color:var(--magenta);color:var(--magenta);box-shadow:0 0 18px rgba(255,45,200,.55), inset 0 0 8px rgba(255,45,200,.4)}
+  .hint{font-size:11px;color:var(--text-dim);text-align:center;flex-basis:100%;margin-top:4px}
+
+  .viewport{
+    width:100vw;aspect-ratio:16/9;overflow:hidden;position:relative;margin-top:8px;
+    border-top:1px solid var(--neon-soft);border-bottom:1px solid var(--neon-soft);
+  }
+  .stage{width:1920px;height:1080px;position:absolute;top:0;left:0;transform-origin:top left}
+
+  /* ---------- Synthwave background ---------- */
+  .scene{position:absolute;inset:0;overflow:hidden;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(155,91,255,.35), transparent 60%),
+      radial-gradient(ellipse at 20% 100%, rgba(255,45,200,.25), transparent 50%),
+      radial-gradient(ellipse at 80% 100%, rgba(0,245,255,.25), transparent 50%),
+      linear-gradient(#06031a 0%, #1a0856 60%, #2c0a6e 100%)
+  }
+  .grid{
+    position:absolute;left:0;right:0;bottom:0;height:55%;
+    background:
+      linear-gradient(rgba(255,45,200,.5) 1px, transparent 1px) 0 0/100% 40px,
+      linear-gradient(90deg, rgba(0,245,255,.5) 1px, transparent 1px) 0 0/40px 100%;
+    transform:perspective(700px) rotateX(60deg);transform-origin:bottom;
+    mask-image:linear-gradient(to top, #000 30%, transparent 100%);
+    -webkit-mask-image:linear-gradient(to top, #000 30%, transparent 100%);
+    opacity:.55
+  }
+  .horizon{
+    position:absolute;left:0;right:0;bottom:55%;height:2px;
+    background:linear-gradient(90deg, transparent, var(--cyan) 20%, var(--magenta) 50%, var(--cyan) 80%, transparent);
+    box-shadow:0 0 30px var(--magenta), 0 0 60px var(--purple)
+  }
+  .sun{
+    position:absolute;left:50%;bottom:40%;width:520px;height:260px;transform:translateX(-50%);
+    background:
+      radial-gradient(ellipse at 50% 100%, var(--magenta) 0%, var(--purple) 40%, transparent 70%);
+    filter:blur(2px);opacity:.8;
+    mask-image:linear-gradient(to top, transparent 5%, #000 30%);
+    -webkit-mask-image:linear-gradient(to top, transparent 5%, #000 30%)
+  }
+  .scanlines{position:absolute;inset:0;pointer-events:none;
+    background:repeating-linear-gradient(180deg, rgba(255,255,255,.03) 0 1px, transparent 1px 4px);
+    mix-blend-mode:overlay;opacity:.5}
+
+  /* ---------- shared widgets ---------- */
+  .gradient-text{
+    background:linear-gradient(90deg,var(--cyan),var(--magenta) 50%,var(--purple));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    text-shadow:0 0 24px rgba(255,45,200,.35)
+  }
+  .eyebrow{font-size:22px;letter-spacing:8px;color:var(--cyan);text-shadow:0 0 12px var(--cyan)}
+
+  /* hexagonal frame */
+  .hex{
+    width:360px;height:400px;position:relative;
+    clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)
+  }
+  .hex.outer{background:linear-gradient(135deg,var(--cyan),var(--magenta) 50%,var(--purple));
+    box-shadow:0 0 40px rgba(255,45,200,.4),0 0 80px rgba(0,245,255,.3)}
+  .hex.inner{
+    position:absolute;inset:5px;
+    background:#0a0526;
+    clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);
+    overflow:hidden;display:flex;align-items:center;justify-content:center
+  }
+
+  /* outline neon button */
+  .neon-btn{
+    height:80px;min-width:280px;padding:0 36px;background:transparent;color:#fff;
+    border:2px solid var(--cyan);border-radius:14px;font-size:30px;letter-spacing:6px;
+    cursor:pointer;
+    box-shadow:0 0 20px rgba(0,245,255,.45),inset 0 0 18px rgba(0,245,255,.18);
+    text-shadow:0 0 10px var(--cyan)
+  }
+  .neon-btn.magenta{border-color:var(--magenta);box-shadow:0 0 20px rgba(255,45,200,.55),inset 0 0 18px rgba(255,45,200,.2);text-shadow:0 0 10px var(--magenta)}
+  .neon-btn.danger{border-color:#ff3057;color:#ff95a8;box-shadow:0 0 20px rgba(255,48,87,.55),inset 0 0 18px rgba(255,48,87,.2);text-shadow:0 0 10px #ff3057}
+  .neon-btn.solid{
+    background:linear-gradient(135deg,rgba(0,245,255,.25),rgba(255,45,200,.25));
+    border-color:var(--magenta);
+    box-shadow:0 0 30px rgba(255,45,200,.6),inset 0 0 24px rgba(155,91,255,.3)
+  }
+
+  /* round chevron */
+  .chev{
+    width:80px;height:80px;display:flex;align-items:center;justify-content:center;
+    background:rgba(28,16,80,.6);color:#fff;font-size:44px;
+    border:2px solid var(--cyan);border-radius:50%;cursor:pointer;
+    box-shadow:0 0 18px rgba(0,245,255,.45),inset 0 0 10px rgba(0,245,255,.25);
+    text-shadow:0 0 10px var(--cyan)
+  }
+  .chev.magenta{border-color:var(--magenta);box-shadow:0 0 18px rgba(255,45,200,.45),inset 0 0 10px rgba(255,45,200,.25);text-shadow:0 0 10px var(--magenta)}
+
+  /* glass card */
+  .glass{
+    background:linear-gradient(180deg, rgba(28,16,80,.78), rgba(15,8,40,.55));
+    border:2px solid var(--neon-soft);border-radius:24px;padding:32px;
+    box-shadow:0 0 30px rgba(155,91,255,.18) inset, 0 0 40px rgba(155,91,255,.2)
+  }
+
+  /* chip */
+  .chip{
+    height:54px;padding:0 22px;background:rgba(0,0,0,.55);
+    border:1px solid var(--cyan);border-radius:999px;
+    display:inline-flex;align-items:center;font-size:20px;letter-spacing:3px;color:#fff;
+    box-shadow:0 0 14px rgba(0,245,255,.35);text-shadow:0 0 6px var(--cyan)
+  }
+
+  .scenes>section{display:none}
+  .scenes>section.active{display:block}
+
+  /* ============ TEAM SELECT ============ */
+  .ts3-top{position:absolute;top:24px;left:60px;right:60px;height:96px;display:flex;align-items:center;justify-content:space-between;z-index:2}
+  .ts3-body{position:absolute;top:140px;left:60px;right:60px;bottom:140px;display:flex;gap:24px;z-index:2}
+  .ts3-team{flex:1.4;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:36px}
+  .ts3-name{font-size:80px;letter-spacing:8px;text-align:center}
+  .ts3-carousel{display:flex;align-items:center;gap:36px;margin:18px 0}
+  .crest{width:90%;height:90%;border-radius:999px;
+    background:conic-gradient(from 0deg, #c81e2c 0 25%, #1746a6 0 50%, #c81e2c 0 75%, #1746a6 0 100%);
+    display:flex;align-items:center;justify-content:center;color:#fff;font-size:36px;
+    box-shadow:inset 0 0 40px rgba(0,0,0,.5)}
+  .stats{width:80%;display:flex;flex-direction:column;gap:14px;margin-top:16px}
+  .stat{display:flex;align-items:center;gap:12px}
+  .stat-lbl{width:140px;font-size:22px;color:var(--text-dim);letter-spacing:4px}
+  .bar{flex:1;height:20px;background:rgba(0,0,0,.55);border:1px solid var(--neon-soft);border-radius:999px;overflow:hidden;
+    box-shadow:inset 0 0 8px rgba(0,0,0,.5)}
+  .bar>span{display:block;height:100%;border-radius:999px;
+    background:linear-gradient(90deg,var(--cyan),var(--magenta));
+    box-shadow:0 0 10px var(--magenta)}
+  .stat-val{width:80px;font-size:28px;text-align:right;color:var(--cyan);text-shadow:0 0 8px var(--cyan)}
+  .ts3-form{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:36px}
+  .pitch{width:90%;height:440px;margin-top:14px;border-radius:14px;position:relative;
+    background:
+      linear-gradient(180deg, rgba(0,0,0,.3), transparent 30%, transparent 70%, rgba(0,0,0,.3)),
+      repeating-linear-gradient(90deg, rgba(0,245,255,.06) 0 80px, transparent 80px 160px),
+      linear-gradient(180deg,#0a0a2c,#06031a);
+    border:2px solid var(--cyan);box-shadow:0 0 30px rgba(0,245,255,.35), inset 0 0 30px rgba(155,91,255,.25);
+    padding:24px;display:flex;flex-direction:column;justify-content:space-around;overflow:hidden}
+  .pitch::before{content:"";position:absolute;left:50%;top:24px;bottom:24px;width:2px;background:var(--magenta);box-shadow:0 0 10px var(--magenta);transform:translateX(-50%)}
+  .pitch::after{content:"";position:absolute;left:50%;top:50%;width:140px;height:140px;border:2px solid var(--magenta);border-radius:999px;transform:translate(-50%,-50%);box-shadow:0 0 14px var(--magenta), inset 0 0 14px var(--magenta)}
+  .line{display:flex;justify-content:space-around;align-items:center;height:80px;position:relative}
+  .marker{width:54px;height:54px;border-radius:999px;
+    background:radial-gradient(circle at 30% 30%,#fff,var(--magenta) 60%,#5a0050);
+    box-shadow:0 0 18px var(--magenta), 0 0 30px var(--purple)}
+  .form-switch{display:flex;align-items:center;gap:18px;margin-top:18px}
+  .form-lbl{font-size:48px;letter-spacing:10px;min-width:300px;text-align:center}
+  .form-nav{width:60px;height:60px;font-size:28px}
+  .ts3-bottom{position:absolute;bottom:32px;left:0;right:0;display:flex;justify-content:center;gap:48px;z-index:2}
+
+  /* ============ PROFILE ============ */
+  .pf3-top{position:absolute;top:24px;left:60px;right:60px;height:96px;display:flex;align-items:center;justify-content:space-between;z-index:2}
+  .pf3-body{position:absolute;top:140px;left:60px;right:60px;bottom:140px;display:flex;gap:24px;z-index:2}
+  .pf3-hero{flex:1;display:flex;flex-direction:column;align-items:center;padding:36px 24px}
+  .avatar-photo{
+    width:100%;height:100%;
+    background:radial-gradient(circle at 35% 30%,#c4a07a,#704a30 60%,#3a2a1a);
+    display:flex;align-items:flex-end;justify-content:center;color:#fff;font-size:24px;padding-bottom:20px
+  }
+  .pf3-cam-row{display:flex;gap:10px;margin-top:14px}
+  .cam-pill{height:50px;padding:0 18px;background:rgba(0,0,0,.55);border:1px solid var(--magenta);border-radius:999px;font-size:18px;color:#fff;
+    box-shadow:0 0 12px rgba(255,45,200,.45);letter-spacing:3px;display:inline-flex;align-items:center}
+  .pf3-name{font-size:76px;letter-spacing:6px;margin-top:24px}
+  .pf3-level-row{display:flex;align-items:center;gap:12px;margin-top:6px}
+  .pf3-level{font-size:32px;color:var(--text-dim);letter-spacing:6px}
+  .pf3-star{font-size:34px;color:var(--green);text-shadow:0 0 10px var(--green)}
+  .xp-row{margin-top:24px;width:80%;display:flex;flex-direction:column;align-items:center}
+  .xp-bar{width:100%;height:24px;background:rgba(0,0,0,.55);border:1px solid var(--neon-soft);border-radius:999px;overflow:hidden;box-shadow:inset 0 0 8px rgba(0,0,0,.5)}
+  .xp-bar>span{display:block;width:18%;height:100%;
+    background:linear-gradient(90deg,var(--cyan),var(--green));
+    box-shadow:0 0 14px var(--green);border-radius:999px}
+  .xp-text{margin-top:8px;font-size:22px;color:var(--text-dim);letter-spacing:3px}
+
+  .pf3-right{flex:1.2;display:flex;flex-direction:column;gap:18px}
+  .pf3-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .pf3-stat{padding:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    background:linear-gradient(180deg, rgba(28,16,80,.65), rgba(15,8,40,.45));
+    border:2px solid var(--cyan);border-radius:18px;
+    box-shadow:0 0 18px rgba(0,245,255,.3),inset 0 0 16px rgba(0,245,255,.12)}
+  .pf3-stat:nth-child(2){border-color:var(--magenta);box-shadow:0 0 18px rgba(255,45,200,.3),inset 0 0 16px rgba(255,45,200,.12)}
+  .pf3-stat:nth-child(3){border-color:var(--green);box-shadow:0 0 18px rgba(57,255,156,.3),inset 0 0 16px rgba(57,255,156,.12)}
+  .pf3-stat:nth-child(4){border-color:var(--purple);box-shadow:0 0 18px rgba(155,91,255,.3),inset 0 0 16px rgba(155,91,255,.12)}
+  .pf3-stat-lbl{font-size:20px;color:var(--text-dim);letter-spacing:6px}
+  .pf3-stat-num{font-size:88px;line-height:1;margin-top:4px}
+  .pf3-stat:nth-child(1) .pf3-stat-num{color:var(--cyan);text-shadow:0 0 18px var(--cyan)}
+  .pf3-stat:nth-child(2) .pf3-stat-num{color:var(--magenta);text-shadow:0 0 18px var(--magenta)}
+  .pf3-stat:nth-child(3) .pf3-stat-num{color:var(--green);text-shadow:0 0 18px var(--green)}
+  .pf3-stat:nth-child(4) .pf3-stat-num{color:var(--purple);text-shadow:0 0 18px var(--purple)}
+
+  .pf3-badge{padding:24px}
+  .pf3-badge-row{display:flex;align-items:center;gap:24px;margin-top:8px}
+  .badge-hex{width:120px;height:140px;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);
+    background:linear-gradient(135deg,var(--cyan),var(--magenta) 50%,var(--purple));
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 0 30px rgba(255,45,200,.5)}
+  .badge-hex .b-inner{width:108px;height:128px;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);background:#0a0526;display:flex;align-items:center;justify-content:center;color:var(--cyan);font-size:26px;letter-spacing:2px;text-shadow:0 0 8px var(--cyan)}
+  .division{font-size:46px;letter-spacing:6px}
+  .division-sub{font-size:22px;color:var(--text-dim);margin-top:4px}
+  .promo-bar{margin-top:12px;width:100%;height:14px;background:rgba(0,0,0,.55);border:1px solid var(--neon-soft);border-radius:999px;overflow:hidden}
+  .promo-bar>span{display:block;width:33%;height:100%;background:linear-gradient(90deg,var(--magenta),var(--purple));box-shadow:0 0 10px var(--magenta)}
+  .pf3-bottom{position:absolute;bottom:32px;left:0;right:0;display:flex;justify-content:center;gap:48px;z-index:2}
+
+  /* ============ MATCHMAKING ============ */
+  .mm3-header{position:absolute;top:36px;left:0;right:0;display:flex;flex-direction:column;align-items:center;gap:8px;z-index:2}
+  .mm3-title{font-size:54px;letter-spacing:10px}
+  .mm3-timer{
+    margin-top:6px;font-size:120px;line-height:1;letter-spacing:14px;
+    background:linear-gradient(180deg,var(--cyan),var(--magenta));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    filter:drop-shadow(0 0 24px rgba(0,245,255,.5))
+  }
+
+  .mm3-arena{position:absolute;top:340px;left:0;right:0;bottom:240px;display:flex;align-items:center;justify-content:center;gap:36px;z-index:2}
+  .mm3-side{width:32%;display:flex;flex-direction:column;align-items:center}
+  .mm3-portrait{width:380px;height:430px;position:relative}
+  .mm3-portrait .ring{
+    position:absolute;inset:-12px;
+    clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);
+    background:conic-gradient(from 0deg, var(--cyan), var(--magenta), var(--purple), var(--cyan));
+    animation:spin 4s linear infinite;
+    filter:drop-shadow(0 0 16px rgba(0,245,255,.55))
+  }
+  .mm3-portrait.right .ring{animation-direction:reverse;background:conic-gradient(from 0deg, var(--magenta), var(--purple), var(--cyan), var(--magenta));filter:drop-shadow(0 0 16px rgba(255,45,200,.55))}
+  @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+  .mm3-portrait .frame{
+    position:absolute;inset:0;
+    clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);
+    background:#0a0526;display:flex;align-items:center;justify-content:center;overflow:hidden
+  }
+  .mm3-portrait .photo{width:100%;height:100%;background:radial-gradient(circle at 50% 30%,#c4a07a,#704a30 60%,#1a1106)}
+  .mm3-portrait .photo.unknown{background:linear-gradient(180deg,#1a1240,#06031a);display:flex;align-items:center;justify-content:center;color:rgba(220,210,255,.4);font-size:200px;animation:pulseQ 2s ease-in-out infinite}
+  @keyframes pulseQ{0%,100%{opacity:.4}50%{opacity:1}}
+
+  .mm3-name{margin-top:28px;font-size:60px;letter-spacing:8px}
+  .mm3-side.left .mm3-name{color:var(--cyan);text-shadow:0 0 18px var(--cyan)}
+  .mm3-side.right .mm3-name{color:var(--magenta);text-shadow:0 0 18px var(--magenta)}
+  .mm3-meta{margin-top:4px;font-size:24px;color:var(--text-dim);letter-spacing:6px}
+
+  .mm3-vs{width:240px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .mm3-vs-text{font-size:200px;line-height:1;letter-spacing:4px;
+    background:linear-gradient(135deg,var(--cyan),var(--magenta));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    filter:drop-shadow(0 0 30px rgba(255,45,200,.55)) drop-shadow(0 0 50px rgba(0,245,255,.45))}
+  .mm3-vs-pulse{width:160px;height:8px;margin-top:14px;background:linear-gradient(90deg,var(--cyan),var(--magenta));border-radius:999px;animation:pulseBar 1.4s ease-in-out infinite;box-shadow:0 0 14px var(--magenta)}
+  @keyframes pulseBar{0%,100%{transform:scaleX(.4);opacity:.5}50%{transform:scaleX(1);opacity:1}}
+
+  .mm3-footer{position:absolute;left:0;right:0;bottom:36px;display:flex;flex-direction:column;align-items:center;gap:12px;z-index:2}
+  .mm3-fairplay{font-size:24px;color:var(--text-dim);letter-spacing:6px}
+  .mm3-tip-row{display:flex;align-items:center;gap:14px}
+  .mm3-tip-dot{width:14px;height:14px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan);animation:dotpulse 1s ease-in-out infinite}
+  @keyframes dotpulse{0%,100%{transform:scale(.7);opacity:.6}50%{transform:scale(1.2);opacity:1}}
+  .mm3-tip{font-size:22px;color:var(--text-dim);letter-spacing:4px}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>ROYAL TABLE SOCCER &mdash; OPCAO 3 (NEON ARENA)</h1>
+  <button class="tab active" data-target="ts3">Selecao de Time</button>
+  <button class="tab" data-target="pf3">Profile</button>
+  <button class="tab" data-target="mm3">Matchmaking</button>
+  <div class="hint">Vire o celular na horizontal para melhor visualizacao</div>
+</header>
+
+<div class="viewport">
+  <div class="stage scenes">
+
+    <!-- ====== TEAM SELECT ====== -->
+    <section id="ts3" class="scene active">
+      <div class="grid"></div>
+      <div class="sun"></div>
+      <div class="horizon"></div>
+      <div class="scanlines"></div>
+
+      <div class="ts3-top">
+        <div class="chev">&lt;</div>
+        <div style="text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px">
+          <div class="eyebrow">CAMPEONATO</div>
+          <div class="gradient-text" style="font-size:36px;letter-spacing:6px">ESCOLHA SEU TIME</div>
+        </div>
+        <div class="chip">LIGA: PRIMERA</div>
+      </div>
+
+      <div class="ts3-body">
+        <div class="ts3-team glass">
+          <div class="ts3-name gradient-text">ARSENAL SARANDI</div>
+
+          <div class="ts3-carousel">
+            <div class="chev magenta">&lt;</div>
+            <div class="hex outer"><div class="hex inner"><div class="crest">ARSENAL</div></div></div>
+            <div class="chev magenta">&gt;</div>
+          </div>
+
+          <div class="stats">
+            <div class="stat"><div class="stat-lbl">ATAQUE</div><div class="bar"><span style="width:84%"></span></div><div class="stat-val">84</div></div>
+            <div class="stat"><div class="stat-lbl">MEIO</div><div class="bar"><span style="width:78%"></span></div><div class="stat-val">78</div></div>
+            <div class="stat"><div class="stat-lbl">DEFESA</div><div class="bar"><span style="width:80%"></span></div><div class="stat-val">80</div></div>
+          </div>
+        </div>
+
+        <div class="ts3-form glass">
+          <div class="eyebrow">FORMACAO</div>
+          <div class="pitch">
+            <div class="line"><div class="marker"></div></div>
+            <div class="line"><div class="marker"></div><div class="marker"></div></div>
+            <div class="line"><div class="marker"></div></div>
+            <div class="line"><div class="marker"></div></div>
+          </div>
+          <div class="form-switch">
+            <div class="chev form-nav">&lt;</div>
+            <div class="form-lbl gradient-text">1 - 2 - 1 - 1</div>
+            <div class="chev form-nav">&gt;</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ts3-bottom">
+        <div class="neon-btn">VOLTAR</div>
+        <div class="neon-btn solid">CONFIRMAR</div>
+      </div>
+    </section>
+
+    <!-- ====== PROFILE ====== -->
+    <section id="pf3" class="scene">
+      <div class="grid"></div>
+      <div class="sun"></div>
+      <div class="horizon"></div>
+      <div class="scanlines"></div>
+
+      <div class="pf3-top">
+        <div class="chev">&lt;</div>
+        <div class="eyebrow">PERFIL DO JOGADOR</div>
+        <div class="chip">RANK 34</div>
+      </div>
+
+      <div class="pf3-body">
+        <div class="pf3-hero glass">
+          <div class="hex outer"><div class="hex inner"><div class="avatar-photo"></div></div></div>
+          <div class="pf3-cam-row">
+            <div class="cam-pill">GALERIA</div>
+            <div class="cam-pill">CAMERA</div>
+          </div>
+          <div class="pf3-name gradient-text">MAFIAZOUK</div>
+          <div class="pf3-level-row">
+            <div class="pf3-level">LEVEL 1</div>
+            <div class="pf3-star">&#9733;</div>
+          </div>
+          <div class="xp-row">
+            <div class="xp-bar"><span></span></div>
+            <div class="xp-text">180 / 1000 XP</div>
+          </div>
+        </div>
+
+        <div class="pf3-right">
+          <div class="pf3-grid">
+            <div class="pf3-stat"><div class="pf3-stat-lbl">ONLINE WINS</div><div class="pf3-stat-num">0</div></div>
+            <div class="pf3-stat"><div class="pf3-stat-lbl">STAR LEAGUE</div><div class="pf3-stat-num">0</div></div>
+            <div class="pf3-stat"><div class="pf3-stat-lbl">TROFEUS</div><div class="pf3-stat-num">3</div></div>
+            <div class="pf3-stat"><div class="pf3-stat-lbl">GOLS</div><div class="pf3-stat-num">12</div></div>
+          </div>
+          <div class="pf3-badge glass">
+            <div class="eyebrow">DIVISAO</div>
+            <div class="pf3-badge-row">
+              <div class="badge-hex"><div class="b-inner">RTS</div></div>
+              <div style="flex:1">
+                <div class="division gradient-text">BRONZE I</div>
+                <div class="division-sub">Vença 3 partidas para promover</div>
+                <div class="promo-bar"><span></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pf3-bottom">
+        <div class="neon-btn">EDITAR NOME</div>
+        <div class="neon-btn magenta">COMPARTILHAR</div>
+      </div>
+    </section>
+
+    <!-- ====== MATCHMAKING ====== -->
+    <section id="mm3" class="scene">
+      <div class="grid"></div>
+      <div class="sun"></div>
+      <div class="horizon"></div>
+      <div class="scanlines"></div>
+
+      <div class="mm3-header">
+        <div class="eyebrow">MATCHMAKING</div>
+        <div class="mm3-title gradient-text">BUSCANDO ADVERSARIO REAL</div>
+        <div class="mm3-timer" id="mm3Timer">00 : 28</div>
+      </div>
+
+      <div class="mm3-arena">
+        <div class="mm3-side left">
+          <div class="mm3-portrait left">
+            <div class="ring"></div>
+            <div class="frame"><div class="photo"></div></div>
+          </div>
+          <div class="mm3-name">MAFIAZOUK</div>
+          <div class="mm3-meta">LV 1 &middot; RANK 34</div>
+        </div>
+
+        <div class="mm3-vs">
+          <div class="mm3-vs-text">VS</div>
+          <div class="mm3-vs-pulse"></div>
+        </div>
+
+        <div class="mm3-side right">
+          <div class="mm3-portrait right">
+            <div class="ring"></div>
+            <div class="frame"><div class="photo unknown">?</div></div>
+          </div>
+          <div class="mm3-name">PROCURANDO</div>
+          <div class="mm3-meta">&mdash;</div>
+        </div>
+      </div>
+
+      <div class="mm3-footer">
+        <div class="mm3-fairplay">RESPEITE O ADVERSARIO NA PARTIDA ONLINE</div>
+        <div class="mm3-tip-row">
+          <div class="mm3-tip-dot"></div>
+          <div class="mm3-tip" id="mm3Tip">DICA: ABASTECA SEU TIME ANTES DAS PARTIDAS RANKEADAS</div>
+        </div>
+        <div class="neon-btn danger" style="margin-top:10px">CANCELAR BUSCA</div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.tab').forEach(t=>{
+    t.addEventListener('click',()=>{
+      document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+      document.querySelectorAll('.scene').forEach(x=>x.classList.remove('active'));
+      t.classList.add('active');
+      document.getElementById(t.dataset.target).classList.add('active');
+    });
+  });
+  function fit(){const vp=document.querySelector('.viewport');const stage=document.querySelector('.stage');stage.style.transform=`scale(${vp.clientWidth/1920})`}
+  window.addEventListener('resize',fit);
+  window.addEventListener('orientationchange',()=>setTimeout(fit,200));
+  fit();
+
+  let sec=28;
+  setInterval(()=>{sec++;document.getElementById('mm3Timer').textContent=`${String(Math.floor(sec/60)).padStart(2,'0')} : ${String(sec%60).padStart(2,'0')}`},1000);
+  const tips=[
+    "DICA: ABASTECA SEU TIME ANTES DAS PARTIDAS RANKEADAS",
+    "DICA: FORMACAO 1-1-2-1 AUMENTA SEU PODER OFENSIVO",
+    "DICA: VITORIAS CONSECUTIVAS DOBRAM SEUS PONTOS",
+    "DICA: COMPLETE OBJETIVOS DIARIOS PARA GANHAR DIAMANTES"
+  ];
+  let ti=0;setInterval(()=>{ti=(ti+1)%tips.length;document.getElementById('mm3Tip').textContent=tips[ti]},4000);
+</script>
+</body>
+</html>

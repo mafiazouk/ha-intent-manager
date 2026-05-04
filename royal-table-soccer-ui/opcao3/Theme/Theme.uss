@@ -1,0 +1,283 @@
+/* =========================================================
+   ROYAL TABLE SOCCER — OPCAO 3 (Neon Arena)
+   Synthwave neon (cyan + magenta + purple) on deep purple/black
+   Layout philosophy = same as opcao 1, but cranked-up neon styling
+   ========================================================= */
+
+:root {
+    /* ---------- Color palette ---------- */
+    --rts3-bg-deep:     rgb(6, 3, 26);
+    --rts3-bg-mid:      rgb(26, 8, 86);
+    --rts3-bg-card:     rgba(28, 16, 80, 0.78);
+    --rts3-bg-glass:    rgba(28, 16, 80, 0.45);
+    --rts3-bg-frame:    rgb(10, 5, 38);
+
+    --rts3-cyan:        rgb(0, 245, 255);
+    --rts3-magenta:     rgb(255, 45, 200);
+    --rts3-purple:      rgb(155, 91, 255);
+    --rts3-pink:        rgb(255, 102, 226);
+    --rts3-blue:        rgb(63, 123, 255);
+    --rts3-green:       rgb(57, 255, 156);
+
+    --rts3-stroke:      rgba(155, 91, 255, 0.55);
+    --rts3-stroke-soft: rgba(155, 91, 255, 0.35);
+
+    --rts3-text:        rgb(255, 255, 255);
+    --rts3-text-dim:    rgba(220, 210, 255, 0.7);
+    --rts3-text-muted:  rgba(220, 210, 255, 0.4);
+
+    --rts3-danger:      rgb(255, 48, 87);
+
+    /* ---------- Spacing ---------- */
+    --rts3-sp-1: 4px;
+    --rts3-sp-2: 8px;
+    --rts3-sp-3: 14px;
+    --rts3-sp-4: 24px;
+    --rts3-sp-5: 36px;
+    --rts3-sp-6: 60px;
+
+    /* ---------- Typography ---------- */
+    --rts3-fs-xs: 16px;
+    --rts3-fs-sm: 22px;
+    --rts3-fs-md: 32px;
+    --rts3-fs-lg: 48px;
+    --rts3-fs-xl: 76px;
+    --rts3-fs-xxl: 120px;
+}
+
+/* ---------- Global font ---------- */
+.rts3-root,
+.rts3-root Label,
+.rts3-root Button {
+    -unity-font-definition: url("project://database/Assets/Fonts/LilitaOne-Regular%20SDF.asset");
+    color: var(--rts3-text);
+    -unity-text-align: middle-center;
+    letter-spacing: 1px;
+}
+
+/* ---------- Stage ---------- */
+.rts3-stage {
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+    background-color: var(--rts3-bg-deep);
+    background-image: url("project://database/Assets/Sprites/UI/synthwave_bg.png");
+    -unity-background-scale-mode: scale-and-crop;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Synthwave perspective grid (sprite, suggested 1920x600 PNG) */
+.rts3-grid {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 55%;
+    background-image: url("project://database/Assets/Sprites/UI/synthwave_grid.png");
+    -unity-background-scale-mode: stretch-to-fill;
+    opacity: 0.9;
+}
+
+/* Glowing horizon line (sprite, suggested 1920x4 PNG with magenta glow) */
+.rts3-horizon {
+    position: absolute;
+    left: 0; right: 0; bottom: 55%;
+    height: 32px;
+    background-image: url("project://database/Assets/Sprites/UI/horizon_glow.png");
+    -unity-background-scale-mode: stretch-to-fill;
+}
+
+.rts3-scanlines {
+    position: absolute;
+    left: 0; top: 0; right: 0; bottom: 0;
+    background-image: url("project://database/Assets/Sprites/UI/scanlines.png");
+    -unity-background-scale-mode: scale-and-crop;
+    opacity: 0.4;
+}
+
+.rts3-stage-overlay {
+    position: absolute;
+    left: 0; top: 0; right: 0; bottom: 0;
+    background-color: rgba(6, 3, 26, 0.4);
+}
+
+/* ---------- Glass card ---------- */
+.rts3-card {
+    background-color: var(--rts3-bg-card);
+    border-left-width: 2px; border-right-width: 2px;
+    border-top-width: 2px; border-bottom-width: 2px;
+    border-left-color: var(--rts3-stroke);
+    border-right-color: var(--rts3-stroke);
+    border-top-color: var(--rts3-stroke);
+    border-bottom-color: var(--rts3-stroke);
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+    padding: var(--rts3-sp-5);
+}
+
+/* ---------- Hex frames -----------
+   Hexagons are not native in USS. Use a sprite mask:
+   - hex_outer.png: gradient border (cyan->magenta->purple), transparent inside
+   - hex_inner.png: solid dark fill in hex shape, transparent outside
+*/
+.rts3-hex-outer {
+    width: 360px;
+    height: 400px;
+    background-image: url("project://database/Assets/Sprites/UI/hex_outer.png");
+    -unity-background-scale-mode: scale-to-fit;
+    align-items: center;
+    justify-content: center;
+}
+.rts3-hex-inner {
+    width: 340px;
+    height: 380px;
+    background-image: url("project://database/Assets/Sprites/UI/hex_inner.png");
+    -unity-background-scale-mode: scale-to-fit;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ---------- Outline neon button ---------- */
+.rts3-neon-btn {
+    height: 80px;
+    min-width: 280px;
+    padding-left: var(--rts3-sp-5);
+    padding-right: var(--rts3-sp-5);
+    background-color: rgba(0, 245, 255, 0.08);
+    border-left-width: 2px; border-right-width: 2px;
+    border-top-width: 2px; border-bottom-width: 2px;
+    border-left-color: var(--rts3-cyan);
+    border-right-color: var(--rts3-cyan);
+    border-top-color: var(--rts3-cyan);
+    border-bottom-color: var(--rts3-cyan);
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
+    color: var(--rts3-text);
+    font-size: 30px;
+    letter-spacing: 6px;
+    text-shadow: 0 0 10px var(--rts3-cyan);
+    transition-property: scale, background-color;
+    transition-duration: 120ms;
+}
+
+.rts3-neon-btn:hover {
+    background-color: rgba(0, 245, 255, 0.22);
+    scale: 1.04 1.04;
+}
+.rts3-neon-btn:active { scale: 0.97 0.97; }
+
+.rts3-neon-btn-magenta {
+    background-color: rgba(255, 45, 200, 0.10);
+    border-left-color: var(--rts3-magenta);
+    border-right-color: var(--rts3-magenta);
+    border-top-color: var(--rts3-magenta);
+    border-bottom-color: var(--rts3-magenta);
+    text-shadow: 0 0 10px var(--rts3-magenta);
+}
+.rts3-neon-btn-magenta:hover { background-color: rgba(255, 45, 200, 0.25); }
+
+.rts3-neon-btn-solid {
+    background-color: rgba(155, 91, 255, 0.28);
+    border-left-color: var(--rts3-magenta);
+    border-right-color: var(--rts3-magenta);
+    border-top-color: var(--rts3-magenta);
+    border-bottom-color: var(--rts3-magenta);
+    text-shadow: 0 0 12px var(--rts3-magenta);
+}
+.rts3-neon-btn-solid:hover { background-color: rgba(155, 91, 255, 0.45); }
+
+.rts3-neon-btn-danger {
+    background-color: rgba(255, 48, 87, 0.10);
+    border-left-color: var(--rts3-danger);
+    border-right-color: var(--rts3-danger);
+    border-top-color: var(--rts3-danger);
+    border-bottom-color: var(--rts3-danger);
+    color: rgb(255, 149, 168);
+    text-shadow: 0 0 10px var(--rts3-danger);
+}
+.rts3-neon-btn-danger:hover { background-color: rgba(255, 48, 87, 0.25); }
+
+/* ---------- Round chevron ---------- */
+.rts3-chev {
+    width: 80px;
+    height: 80px;
+    background-color: rgba(28, 16, 80, 0.6);
+    border-left-width: 2px; border-right-width: 2px;
+    border-top-width: 2px; border-bottom-width: 2px;
+    border-left-color: var(--rts3-cyan);
+    border-right-color: var(--rts3-cyan);
+    border-top-color: var(--rts3-cyan);
+    border-bottom-color: var(--rts3-cyan);
+    border-top-left-radius: 999px;
+    border-top-right-radius: 999px;
+    border-bottom-left-radius: 999px;
+    border-bottom-right-radius: 999px;
+    color: var(--rts3-text);
+    font-size: 44px;
+    text-shadow: 0 0 10px var(--rts3-cyan);
+    transition-property: scale, background-color;
+    transition-duration: 120ms;
+}
+.rts3-chev:hover { background-color: rgba(0, 245, 255, 0.2); scale: 1.06 1.06; }
+.rts3-chev:active { scale: 0.92 0.92; }
+
+.rts3-chev-magenta {
+    border-left-color: var(--rts3-magenta);
+    border-right-color: var(--rts3-magenta);
+    border-top-color: var(--rts3-magenta);
+    border-bottom-color: var(--rts3-magenta);
+    text-shadow: 0 0 10px var(--rts3-magenta);
+}
+.rts3-chev-magenta:hover { background-color: rgba(255, 45, 200, 0.18); }
+
+/* ---------- Chip ---------- */
+.rts3-chip {
+    height: 54px;
+    padding-left: var(--rts3-sp-4);
+    padding-right: var(--rts3-sp-4);
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.55);
+    border-left-width: 1px; border-right-width: 1px;
+    border-top-width: 1px;  border-bottom-width: 1px;
+    border-left-color: var(--rts3-cyan);
+    border-right-color: var(--rts3-cyan);
+    border-top-color: var(--rts3-cyan);
+    border-bottom-color: var(--rts3-cyan);
+    border-top-left-radius: 999px;
+    border-top-right-radius: 999px;
+    border-bottom-left-radius: 999px;
+    border-bottom-right-radius: 999px;
+}
+.rts3-chip Label {
+    font-size: 20px;
+    color: var(--rts3-text);
+    letter-spacing: 3px;
+    text-shadow: 0 0 6px var(--rts3-cyan);
+}
+
+/* ---------- Titles ---------- */
+.rts3-title {
+    font-size: var(--rts3-fs-xl);
+    color: var(--rts3-magenta);
+    text-shadow: 0 0 24px var(--rts3-magenta), 0 0 60px var(--rts3-purple);
+    letter-spacing: 8px;
+}
+
+.rts3-eyebrow {
+    font-size: var(--rts3-fs-sm);
+    color: var(--rts3-cyan);
+    text-shadow: 0 0 10px var(--rts3-cyan);
+    letter-spacing: 8px;
+}
+
+.rts3-subtitle {
+    font-size: var(--rts3-fs-md);
+    color: var(--rts3-pink);
+    text-shadow: 0 0 14px var(--rts3-magenta);
+    letter-spacing: 6px;
+}
