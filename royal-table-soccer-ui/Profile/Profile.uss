@@ -1,0 +1,302 @@
+/* ===== Profile scene ===== */
+
+.pf-topbar {
+    position: absolute;
+    top: 24px; left: 32px; right: 32px;
+    height: 96px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.pf-topbar-center {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.pf-body {
+    width: 96%;
+    max-width: 1820px;
+    height: 78%;
+    margin-top: 140px;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: center;
+}
+
+/* ----- Hero ----- */
+.pf-hero {
+    flex-grow: 1;
+    flex-basis: 0;
+    margin-right: 24px;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 48px;
+    padding-bottom: 48px;
+}
+
+.pf-avatar-wrap {
+    width: 360px;
+    height: 360px;
+    align-items: center;
+    justify-content: center;
+}
+
+.pf-avatar-glow {
+    position: absolute;
+    width: 380px;
+    height: 380px;
+    border-top-left-radius: 999px;
+    border-top-right-radius: 999px;
+    border-bottom-left-radius: 999px;
+    border-bottom-right-radius: 999px;
+    background-color: rgba(0, 230, 255, 0.18);
+    border-left-width: 4px;
+    border-right-width: 4px;
+    border-top-width: 4px;
+    border-bottom-width: 4px;
+    border-left-color: rgba(170, 90, 255, 0.85);
+    border-right-color: rgba(170, 90, 255, 0.85);
+    border-top-color: rgba(170, 90, 255, 0.85);
+    border-bottom-color: rgba(170, 90, 255, 0.85);
+}
+
+.pf-avatar {
+    width: 320px;
+    height: 320px;
+    border-top-left-radius: 999px;
+    border-top-right-radius: 999px;
+    border-bottom-left-radius: 999px;
+    border-bottom-right-radius: 999px;
+    background-image: url("project://database/Assets/Sprites/UI/avatar_placeholder.png");
+    -unity-background-scale-mode: scale-and-crop;
+    overflow: hidden;
+}
+
+.pf-avatar-actions {
+    position: absolute;
+    bottom: -16px;
+    flex-direction: row;
+}
+
+.pf-icon-pill {
+    height: 56px;
+    min-width: 140px;
+    margin-left: 8px;
+    margin-right: 8px;
+    padding-left: 18px;
+    padding-right: 18px;
+    background-color: rgba(8, 16, 40, 0.92);
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    border-left-color: rgb(0, 230, 255);
+    border-right-color: rgb(0, 230, 255);
+    border-top-color: rgb(0, 230, 255);
+    border-bottom-color: rgb(0, 230, 255);
+    border-top-left-radius: 999px;
+    border-top-right-radius: 999px;
+    border-bottom-left-radius: 999px;
+    border-bottom-right-radius: 999px;
+    color: rgb(255, 255, 255);
+    font-size: 22px;
+    letter-spacing: 3px;
+    transition-property: scale, background-color;
+    transition-duration: 120ms;
+}
+
+.pf-icon-pill:hover {
+    background-color: rgba(28, 56, 180, 0.92);
+    scale: 1.06 1.06;
+}
+
+.pf-id {
+    margin-top: 56px;
+    align-items: center;
+}
+
+.pf-name-row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.pf-name {
+    font-size: 64px;
+    color: rgb(255, 200, 60);
+    letter-spacing: 6px;
+}
+
+.pf-star {
+    margin-left: 16px;
+    font-size: 56px;
+    color: rgb(255, 200, 60);
+}
+
+.pf-level {
+    margin-top: 8px;
+    font-size: 32px;
+    color: rgba(220, 230, 255, 0.85);
+    letter-spacing: 6px;
+}
+
+.pf-xp-row {
+    margin-top: 24px;
+    width: 80%;
+    align-items: center;
+}
+
+.pf-xp-bar {
+    width: 100%;
+    height: 22px;
+    background-color: rgba(8, 16, 40, 0.85);
+    border-top-left-radius: 999px;
+    border-top-right-radius: 999px;
+    border-bottom-left-radius: 999px;
+    border-bottom-right-radius: 999px;
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-left-color: rgba(140, 110, 255, 0.45);
+    border-right-color: rgba(140, 110, 255, 0.45);
+    border-top-color: rgba(140, 110, 255, 0.45);
+    border-bottom-color: rgba(140, 110, 255, 0.45);
+    overflow: hidden;
+}
+
+.pf-xp-fill {
+    height: 100%;
+    width: 12%;
+    background-color: rgb(80, 255, 160);
+    border-top-left-radius: 999px;
+    border-bottom-left-radius: 999px;
+    transition-property: width;
+    transition-duration: 240ms;
+}
+
+.pf-xp-text {
+    margin-top: 8px;
+    font-size: 22px;
+    color: rgba(220, 230, 255, 0.85);
+    letter-spacing: 3px;
+}
+
+/* ----- Right column ----- */
+.pf-right {
+    flex-grow: 1.2;
+    flex-basis: 0;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.pf-stat-grid {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.pf-stat-card {
+    width: 47%;
+    margin-bottom: 16px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    align-items: center;
+    justify-content: center;
+}
+
+.pf-stat-eyebrow {
+    font-size: 22px;
+    color: rgb(0, 230, 255);
+    letter-spacing: 6px;
+}
+
+.pf-stat-big {
+    font-size: 88px;
+    color: rgb(255, 255, 255);
+    letter-spacing: 4px;
+    margin-top: 4px;
+}
+
+/* Badge */
+.pf-badge-card {
+    margin-top: 8px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+}
+
+.pf-badge-row {
+    flex-direction: row;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.pf-badge {
+    width: 140px;
+    height: 160px;
+    background-image: url("project://database/Assets/Sprites/UI/badge_placeholder.png");
+    -unity-background-scale-mode: scale-to-fit;
+    margin-right: 24px;
+}
+
+.pf-badge-text {
+    flex-grow: 1;
+    flex-direction: column;
+}
+
+.pf-division-name {
+    font-size: 44px;
+    color: rgb(255, 200, 60);
+    letter-spacing: 6px;
+    -unity-text-align: middle-left;
+}
+
+.pf-division-sub {
+    margin-top: 4px;
+    font-size: 22px;
+    color: rgba(220, 230, 255, 0.75);
+    -unity-text-align: middle-left;
+    letter-spacing: 1px;
+}
+
+.pf-promo-bar {
+    margin-top: 12px;
+    width: 100%;
+    height: 14px;
+    background-color: rgba(8, 16, 40, 0.85);
+    border-top-left-radius: 999px;
+    border-top-right-radius: 999px;
+    border-bottom-left-radius: 999px;
+    border-bottom-right-radius: 999px;
+    overflow: hidden;
+}
+
+.pf-promo-fill {
+    height: 100%;
+    width: 33%;
+    background-color: rgb(255, 200, 60);
+    border-top-left-radius: 999px;
+    border-bottom-left-radius: 999px;
+    transition-property: width;
+    transition-duration: 240ms;
+}
+
+/* Bottom bar */
+.pf-bottombar {
+    position: absolute;
+    bottom: 32px;
+    left: 0; right: 0;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.pf-bottombar > .rts-btn {
+    margin-left: 24px;
+    margin-right: 24px;
+    min-width: 320px;
+    height: 80px;
+    font-size: 32px;
+}

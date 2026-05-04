@@ -1,0 +1,263 @@
+/* ===== Team Select scene ===== */
+
+.ts-topbar {
+    position: absolute;
+    top: 24px; left: 32px; right: 32px;
+    height: 96px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ts-topbar-center {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.ts-topbar-right {
+    flex-direction: row;
+    align-items: center;
+}
+
+.ts-body {
+    width: 96%;
+    max-width: 1800px;
+    height: 76%;
+    margin-top: 140px;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: center;
+}
+
+/* ----- Team pane ----- */
+.ts-team-pane {
+    flex-grow: 1.4;
+    margin-right: 24px;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 48px;
+    padding-bottom: 48px;
+}
+
+.ts-team-name {
+    font-size: 72px;
+    color: rgb(255, 255, 255);
+    letter-spacing: 6px;
+    -unity-text-align: middle-center;
+}
+
+.ts-carousel {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+.ts-carousel-nav {
+    margin-left: 32px;
+    margin-right: 32px;
+}
+
+.ts-crest-frame {
+    width: 360px;
+    height: 360px;
+    align-items: center;
+    justify-content: center;
+}
+
+.ts-crest-glow {
+    position: absolute;
+    width: 380px;
+    height: 380px;
+    border-top-left-radius: 999px;
+    border-top-right-radius: 999px;
+    border-bottom-left-radius: 999px;
+    border-bottom-right-radius: 999px;
+    background-color: rgba(170, 90, 255, 0.18);
+    border-left-width: 4px;
+    border-right-width: 4px;
+    border-top-width: 4px;
+    border-bottom-width: 4px;
+    border-left-color: rgba(0, 230, 255, 0.55);
+    border-right-color: rgba(0, 230, 255, 0.55);
+    border-top-color: rgba(0, 230, 255, 0.55);
+    border-bottom-color: rgba(0, 230, 255, 0.55);
+}
+
+.ts-crest {
+    width: 300px;
+    height: 300px;
+    background-image: url("project://database/Assets/Sprites/UI/crest_placeholder.png");
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+/* ----- Stats ----- */
+.ts-stats-row {
+    width: 80%;
+    flex-direction: column;
+    margin-top: 16px;
+}
+
+.ts-stat {
+    flex-direction: row;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.ts-stat-label {
+    width: 140px;
+    font-size: 22px;
+    color: rgba(220, 230, 255, 0.85);
+    -unity-text-align: middle-left;
+    letter-spacing: 3px;
+}
+
+.ts-stat-bar {
+    flex-grow: 1;
+    height: 18px;
+    background-color: rgba(8, 16, 40, 0.85);
+    border-top-left-radius: 999px;
+    border-top-right-radius: 999px;
+    border-bottom-left-radius: 999px;
+    border-bottom-right-radius: 999px;
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-left-color: rgba(140, 110, 255, 0.45);
+    border-right-color: rgba(140, 110, 255, 0.45);
+    border-top-color: rgba(140, 110, 255, 0.45);
+    border-bottom-color: rgba(140, 110, 255, 0.45);
+    overflow: hidden;
+}
+
+.ts-stat-fill {
+    height: 100%;
+    border-top-left-radius: 999px;
+    border-bottom-left-radius: 999px;
+    border-top-right-radius: 999px;
+    border-bottom-right-radius: 999px;
+    width: 50%;
+    transition-property: width;
+    transition-duration: 240ms;
+}
+
+.ts-stat-fill-atk { background-color: rgb(255, 60, 200); }
+.ts-stat-fill-mid { background-color: rgb(170, 90, 255); }
+.ts-stat-fill-def { background-color: rgb(0, 230, 255); }
+
+.ts-stat-value {
+    width: 80px;
+    font-size: 28px;
+    color: rgb(255, 255, 255);
+    -unity-text-align: middle-right;
+    margin-left: 12px;
+}
+
+/* ----- Formation pane ----- */
+.ts-formation-pane {
+    flex-grow: 1;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 48px;
+    padding-bottom: 48px;
+}
+
+.ts-pitch {
+    width: 88%;
+    height: 460px;
+    margin-top: 16px;
+    background-color: rgb(36, 110, 60);
+    background-image: url("project://database/Assets/Sprites/UI/pitch_top.png");
+    -unity-background-scale-mode: scale-and-crop;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    border-left-width: 3px;
+    border-right-width: 3px;
+    border-top-width: 3px;
+    border-bottom-width: 3px;
+    border-left-color: rgba(255, 255, 255, 0.6);
+    border-right-color: rgba(255, 255, 255, 0.6);
+    border-top-color: rgba(255, 255, 255, 0.6);
+    border-bottom-color: rgba(255, 255, 255, 0.6);
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: stretch;
+    padding: 24px;
+}
+
+.ts-pitch-line {
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    height: 80px;
+}
+
+.ts-pitch-marker {
+    width: 56px;
+    height: 56px;
+    background-image: url("project://database/Assets/Sprites/UI/ball_marker.png");
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.ts-formation-switch {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 24px;
+}
+
+.ts-form-nav {
+    width: 64px;
+    height: 64px;
+    margin-left: 16px;
+    margin-right: 16px;
+    font-size: 28px;
+}
+
+.ts-formation-label {
+    font-size: 44px;
+    color: rgb(255, 255, 255);
+    letter-spacing: 8px;
+    min-width: 280px;
+    -unity-text-align: middle-center;
+}
+
+/* ----- Bottom bar ----- */
+.ts-bottombar {
+    position: absolute;
+    bottom: 32px;
+    left: 0; right: 0;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.ts-bottom-btn {
+    margin-left: 24px;
+    margin-right: 24px;
+    min-width: 320px;
+    height: 84px;
+    font-size: 36px;
+}
+
+.ts-confirm {
+    background-color: rgb(28, 56, 180);
+    border-left-color: rgb(0, 230, 255);
+    border-right-color: rgb(0, 230, 255);
+    border-top-color: rgb(0, 230, 255);
+    border-bottom-color: rgb(0, 230, 255);
+}
+
+.ts-confirm:hover {
+    background-color: rgb(56, 96, 240);
+    border-left-color: rgb(170, 90, 255);
+    border-right-color: rgb(170, 90, 255);
+    border-top-color: rgb(170, 90, 255);
+    border-bottom-color: rgb(170, 90, 255);
+}

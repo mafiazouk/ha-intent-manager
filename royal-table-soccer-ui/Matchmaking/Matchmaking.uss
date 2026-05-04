@@ -1,0 +1,210 @@
+/* ===== Matchmaking scene ===== */
+
+.mm-header {
+    position: absolute;
+    top: 48px; left: 0; right: 0;
+    align-items: center;
+}
+
+.mm-title {
+    font-size: 56px;
+    color: rgb(255, 255, 255);
+    letter-spacing: 8px;
+    margin-top: 8px;
+}
+
+.mm-timer {
+    font-size: 96px;
+    color: rgb(0, 230, 255);
+    letter-spacing: 12px;
+    margin-top: 8px;
+}
+
+/* Arena */
+.mm-arena {
+    width: 100%;
+    height: 60%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 48px;
+}
+
+.mm-side {
+    width: 32%;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 24px;
+    padding-bottom: 24px;
+}
+
+.mm-portrait-wrap {
+    width: 360px;
+    height: 360px;
+    align-items: center;
+    justify-content: center;
+}
+
+.mm-portrait-frame {
+    width: 320px;
+    height: 320px;
+    border-top-left-radius: 999px;
+    border-top-right-radius: 999px;
+    border-bottom-left-radius: 999px;
+    border-bottom-right-radius: 999px;
+    background-color: rgba(8, 16, 40, 0.92);
+    border-left-width: 4px;
+    border-right-width: 4px;
+    border-top-width: 4px;
+    border-bottom-width: 4px;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+}
+
+.mm-portrait {
+    width: 100%;
+    height: 100%;
+    background-image: url("project://database/Assets/Sprites/UI/avatar_placeholder.png");
+    -unity-background-scale-mode: scale-and-crop;
+}
+
+.mm-portrait-unknown {
+    background-image: none;
+    background-color: rgba(20, 36, 96, 0.85);
+}
+
+.mm-question {
+    position: absolute;
+    font-size: 180px;
+    color: rgba(220, 230, 255, 0.55);
+}
+
+/* Spinner ring (rotating) */
+.mm-spinner {
+    position: absolute;
+    width: 360px;
+    height: 360px;
+    border-top-left-radius: 999px;
+    border-top-right-radius: 999px;
+    border-bottom-left-radius: 999px;
+    border-bottom-right-radius: 999px;
+    border-left-width: 4px;
+    border-right-width: 4px;
+    border-top-width: 4px;
+    border-bottom-width: 4px;
+    border-left-color: rgba(0, 230, 255, 0.95);
+    border-right-color: rgba(0, 230, 255, 0.05);
+    border-top-color: rgba(0, 230, 255, 0.55);
+    border-bottom-color: rgba(0, 230, 255, 0.05);
+    rotate: 0deg;
+    transition-property: rotate;
+    transition-duration: 0ms;
+}
+
+.mm-side-left .mm-portrait-frame {
+    border-left-color: rgb(0, 230, 255);
+    border-right-color: rgb(0, 230, 255);
+    border-top-color: rgb(0, 230, 255);
+    border-bottom-color: rgb(0, 230, 255);
+}
+.mm-side-right .mm-portrait-frame {
+    border-left-color: rgb(255, 70, 90);
+    border-right-color: rgb(255, 70, 90);
+    border-top-color: rgb(255, 70, 90);
+    border-bottom-color: rgb(255, 70, 90);
+}
+
+.mm-spinner-right {
+    border-left-color: rgba(255, 70, 90, 0.95);
+    border-right-color: rgba(255, 70, 90, 0.05);
+    border-top-color: rgba(255, 70, 90, 0.55);
+    border-bottom-color: rgba(255, 70, 90, 0.05);
+}
+
+.mm-name {
+    margin-top: 24px;
+    font-size: 56px;
+    letter-spacing: 6px;
+    -unity-text-align: middle-center;
+}
+
+.mm-name-left  { color: rgb(0, 230, 255); }
+.mm-name-right { color: rgb(255, 70, 90); }
+
+.mm-meta {
+    margin-top: 4px;
+    font-size: 26px;
+    color: rgba(220, 230, 255, 0.75);
+    letter-spacing: 4px;
+}
+
+/* VS in middle */
+.mm-vs-wrap {
+    width: 220px;
+    height: 220px;
+    align-items: center;
+    justify-content: center;
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+.mm-vs-text {
+    font-size: 180px;
+    color: rgb(255, 255, 255);
+    letter-spacing: 4px;
+    -unity-text-align: middle-center;
+}
+
+.mm-vs-bolt {
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    background-image: url("project://database/Assets/Sprites/UI/vs_bolt.png");
+    -unity-background-scale-mode: scale-to-fit;
+    opacity: 0.6;
+}
+
+/* Footer */
+.mm-footer {
+    position: absolute;
+    bottom: 32px;
+    left: 0; right: 0;
+    align-items: center;
+}
+
+.mm-fairplay {
+    font-size: 26px;
+    color: rgba(220, 230, 255, 0.85);
+    letter-spacing: 6px;
+}
+
+.mm-tip-row {
+    margin-top: 12px;
+    flex-direction: row;
+    align-items: center;
+}
+
+.mm-tip-dot {
+    width: 12px;
+    height: 12px;
+    background-color: rgb(0, 230, 255);
+    border-top-left-radius: 999px;
+    border-top-right-radius: 999px;
+    border-bottom-left-radius: 999px;
+    border-bottom-right-radius: 999px;
+    margin-right: 12px;
+}
+
+.mm-tip {
+    font-size: 22px;
+    color: rgba(220, 230, 255, 0.65);
+    letter-spacing: 3px;
+}
+
+.mm-cancel {
+    margin-top: 24px;
+    min-width: 360px;
+    height: 80px;
+    font-size: 32px;
+}

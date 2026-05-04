@@ -1,0 +1,248 @@
+/* =========================================================
+   ROYAL TABLE SOCCER — Stadium Night Theme
+   Design tokens shared by all scenes (1920x1080 landscape)
+   ========================================================= */
+
+:root {
+    /* ---------- Color palette ---------- */
+    --rts-bg-deep:        rgb(4, 8, 22);
+    --rts-bg-mid:         rgb(10, 18, 48);
+    --rts-bg-card:        rgba(20, 36, 96, 0.85);
+    --rts-bg-card-hi:     rgba(38, 64, 158, 0.95);
+    --rts-bg-glass:       rgba(20, 36, 96, 0.55);
+    --rts-stroke:         rgba(140, 110, 255, 0.85);
+    --rts-stroke-soft:    rgba(140, 110, 255, 0.35);
+
+    --rts-royal-blue:     rgb(28, 56, 180);
+    --rts-royal-blue-hi:  rgb(56, 96, 240);
+
+    --rts-neon-cyan:      rgb(0, 230, 255);
+    --rts-neon-magenta:   rgb(255, 60, 200);
+    --rts-neon-purple:    rgb(170, 90, 255);
+    --rts-neon-green:     rgb(80, 255, 160);
+
+    --rts-text:           rgb(255, 255, 255);
+    --rts-text-dim:       rgba(220, 230, 255, 0.65);
+    --rts-text-gold:      rgb(255, 200, 60);
+
+    --rts-danger:         rgb(255, 70, 90);
+    --rts-success:        rgb(80, 230, 130);
+
+    /* ---------- Spacing ---------- */
+    --rts-sp-1: 4px;
+    --rts-sp-2: 8px;
+    --rts-sp-3: 16px;
+    --rts-sp-4: 24px;
+    --rts-sp-5: 32px;
+    --rts-sp-6: 48px;
+    --rts-sp-7: 64px;
+
+    /* ---------- Radii ---------- */
+    --rts-r-sm: 8px;
+    --rts-r-md: 18px;
+    --rts-r-lg: 28px;
+    --rts-r-pill: 999px;
+
+    /* ---------- Typography sizes (1920x1080 base) ---------- */
+    --rts-fs-xs: 16px;
+    --rts-fs-sm: 22px;
+    --rts-fs-md: 30px;
+    --rts-fs-lg: 44px;
+    --rts-fs-xl: 64px;
+    --rts-fs-xxl: 96px;
+}
+
+/* ---------- Global font ---------- */
+.rts-root,
+.rts-root Label,
+.rts-root Button {
+    -unity-font-definition: url("project://database/Assets/Fonts/LilitaOne-Regular%20SDF.asset");
+    color: var(--rts-text);
+    -unity-text-align: middle-center;
+    letter-spacing: 1px;
+}
+
+/* ---------- Stadium night background ---------- */
+.rts-stage {
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+    background-color: var(--rts-bg-deep);
+    background-image: url("project://database/Assets/Sprites/UI/stadium_night.png");
+    -unity-background-scale-mode: scale-and-crop;
+    align-items: center;
+    justify-content: center;
+}
+
+.rts-stage-overlay {
+    position: absolute;
+    left: 0; top: 0; right: 0; bottom: 0;
+    background-color: rgba(4, 8, 22, 0.55);
+}
+
+/* ---------- Cards ---------- */
+.rts-card {
+    background-color: var(--rts-bg-card);
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    border-left-color: var(--rts-stroke);
+    border-right-color: var(--rts-stroke);
+    border-top-color: var(--rts-stroke);
+    border-bottom-color: var(--rts-stroke);
+    border-top-left-radius: var(--rts-r-lg);
+    border-top-right-radius: var(--rts-r-lg);
+    border-bottom-left-radius: var(--rts-r-lg);
+    border-bottom-right-radius: var(--rts-r-lg);
+    padding: var(--rts-sp-5);
+}
+
+.rts-card-glass {
+    background-color: var(--rts-bg-glass);
+    border-left-color: var(--rts-stroke-soft);
+    border-right-color: var(--rts-stroke-soft);
+    border-top-color: var(--rts-stroke-soft);
+    border-bottom-color: var(--rts-stroke-soft);
+}
+
+/* ---------- Buttons (pill, neon glow) ---------- */
+.rts-btn {
+    height: 72px;
+    min-width: 200px;
+    padding-left: var(--rts-sp-5);
+    padding-right: var(--rts-sp-5);
+    background-color: var(--rts-royal-blue);
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    border-left-color: var(--rts-neon-purple);
+    border-right-color: var(--rts-neon-purple);
+    border-top-color: var(--rts-neon-purple);
+    border-bottom-color: var(--rts-neon-purple);
+    border-top-left-radius: var(--rts-r-pill);
+    border-top-right-radius: var(--rts-r-pill);
+    border-bottom-left-radius: var(--rts-r-pill);
+    border-bottom-right-radius: var(--rts-r-pill);
+    color: var(--rts-text);
+    font-size: var(--rts-fs-md);
+    transition-property: scale, background-color, border-color;
+    transition-duration: 120ms;
+}
+
+.rts-btn:hover {
+    background-color: var(--rts-royal-blue-hi);
+    border-left-color: var(--rts-neon-cyan);
+    border-right-color: var(--rts-neon-cyan);
+    border-top-color: var(--rts-neon-cyan);
+    border-bottom-color: var(--rts-neon-cyan);
+    scale: 1.04 1.04;
+}
+
+.rts-btn:active {
+    scale: 0.97 0.97;
+    background-color: rgb(20, 38, 130);
+}
+
+.rts-btn-ghost {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.rts-btn-danger {
+    border-left-color: var(--rts-danger);
+    border-right-color: var(--rts-danger);
+    border-top-color: var(--rts-danger);
+    border-bottom-color: var(--rts-danger);
+    background-color: rgba(60, 8, 18, 0.85);
+    color: var(--rts-danger);
+}
+
+.rts-btn-danger:hover {
+    background-color: rgba(120, 16, 36, 0.95);
+    border-left-color: rgb(255, 120, 140);
+    border-right-color: rgb(255, 120, 140);
+    border-top-color: rgb(255, 120, 140);
+    border-bottom-color: rgb(255, 120, 140);
+}
+
+/* ---------- Round icon buttons (back / next) ---------- */
+.rts-iconbtn {
+    width: 80px;
+    height: 80px;
+    border-top-left-radius: var(--rts-r-pill);
+    border-top-right-radius: var(--rts-r-pill);
+    border-bottom-left-radius: var(--rts-r-pill);
+    border-bottom-right-radius: var(--rts-r-pill);
+    background-color: var(--rts-bg-card);
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    border-left-color: var(--rts-stroke);
+    border-right-color: var(--rts-stroke);
+    border-top-color: var(--rts-stroke);
+    border-bottom-color: var(--rts-stroke);
+    color: var(--rts-text);
+    font-size: var(--rts-fs-lg);
+    transition-property: scale, background-color;
+    transition-duration: 120ms;
+}
+
+.rts-iconbtn:hover {
+    background-color: var(--rts-bg-card-hi);
+    scale: 1.08 1.08;
+}
+
+.rts-iconbtn:active { scale: 0.92 0.92; }
+
+/* ---------- Titles ---------- */
+.rts-title {
+    font-size: var(--rts-fs-xl);
+    color: var(--rts-text);
+    -unity-text-align: middle-center;
+    letter-spacing: 4px;
+}
+
+.rts-subtitle {
+    font-size: var(--rts-fs-md);
+    color: var(--rts-text-dim);
+    -unity-text-align: middle-center;
+    letter-spacing: 2px;
+}
+
+.rts-eyebrow {
+    font-size: var(--rts-fs-sm);
+    color: var(--rts-neon-cyan);
+    letter-spacing: 6px;
+}
+
+/* ---------- Stat chip ---------- */
+.rts-chip {
+    height: 56px;
+    min-width: 140px;
+    padding-left: var(--rts-sp-4);
+    padding-right: var(--rts-sp-4);
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(8, 16, 40, 0.7);
+    border-top-left-radius: var(--rts-r-pill);
+    border-top-right-radius: var(--rts-r-pill);
+    border-bottom-left-radius: var(--rts-r-pill);
+    border-bottom-right-radius: var(--rts-r-pill);
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-left-color: var(--rts-stroke-soft);
+    border-right-color: var(--rts-stroke-soft);
+    border-top-color: var(--rts-stroke-soft);
+    border-bottom-color: var(--rts-stroke-soft);
+}
+
+.rts-chip-label {
+    font-size: var(--rts-fs-sm);
+    color: var(--rts-text);
+    margin-left: var(--rts-sp-2);
+}

@@ -1,0 +1,92 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/royal-table-soccer-ui/Theme/Theme.uss" />
+    <Style src="project://database/Assets/UI/royal-table-soccer-ui/TeamSelect/TeamSelect.uss" />
+
+    <ui:VisualElement name="root" class="rts-root rts-stage">
+        <ui:VisualElement class="rts-stage-overlay" />
+
+        <!-- Top bar -->
+        <ui:VisualElement name="top-bar" class="ts-topbar">
+            <ui:Button name="btn-back" class="rts-iconbtn" text="&lt;" />
+            <ui:VisualElement class="ts-topbar-center">
+                <ui:Label class="rts-eyebrow" text="CAMPEONATO" />
+                <ui:Label name="lbl-step" class="rts-subtitle" text="ESCOLHA SEU TIME" />
+            </ui:VisualElement>
+            <ui:VisualElement class="ts-topbar-right">
+                <ui:VisualElement class="rts-chip">
+                    <ui:Label class="rts-chip-label" text="LIGA: PRIMERA" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- Body: 2 columns -->
+        <ui:VisualElement name="body" class="ts-body">
+
+            <!-- LEFT: team carousel -->
+            <ui:VisualElement name="team-pane" class="ts-team-pane rts-card">
+                <ui:Label name="lbl-team-name" class="ts-team-name" text="ARSENAL SARANDI" />
+
+                <ui:VisualElement class="ts-carousel">
+                    <ui:Button name="btn-prev-team" class="rts-iconbtn ts-carousel-nav" text="&lt;" />
+                    <ui:VisualElement name="team-crest-frame" class="ts-crest-frame">
+                        <ui:VisualElement name="team-crest-glow" class="ts-crest-glow" />
+                        <ui:VisualElement name="team-crest" class="ts-crest" />
+                    </ui:VisualElement>
+                    <ui:Button name="btn-next-team" class="rts-iconbtn ts-carousel-nav" text="&gt;" />
+                </ui:VisualElement>
+
+                <!-- Team stats row -->
+                <ui:VisualElement class="ts-stats-row">
+                    <ui:VisualElement class="ts-stat">
+                        <ui:Label class="ts-stat-label" text="ATAQUE" />
+                        <ui:VisualElement class="ts-stat-bar"><ui:VisualElement name="stat-atk" class="ts-stat-fill ts-stat-fill-atk" /></ui:VisualElement>
+                        <ui:Label name="stat-atk-val" class="ts-stat-value" text="84" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="ts-stat">
+                        <ui:Label class="ts-stat-label" text="MEIO" />
+                        <ui:VisualElement class="ts-stat-bar"><ui:VisualElement name="stat-mid" class="ts-stat-fill ts-stat-fill-mid" /></ui:VisualElement>
+                        <ui:Label name="stat-mid-val" class="ts-stat-value" text="78" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="ts-stat">
+                        <ui:Label class="ts-stat-label" text="DEFESA" />
+                        <ui:VisualElement class="ts-stat-bar"><ui:VisualElement name="stat-def" class="ts-stat-fill ts-stat-fill-def" /></ui:VisualElement>
+                        <ui:Label name="stat-def-val" class="ts-stat-value" text="80" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+            <!-- RIGHT: formation pane -->
+            <ui:VisualElement name="formation-pane" class="ts-formation-pane rts-card rts-card-glass">
+                <ui:Label class="rts-eyebrow" text="FORMACAO" />
+                <ui:VisualElement name="pitch" class="ts-pitch">
+                    <!-- 1-2-1-1 default placement; controller can rebuild -->
+                    <ui:VisualElement class="ts-pitch-line ts-pitch-line-gk">
+                        <ui:VisualElement class="ts-pitch-marker" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="ts-pitch-line ts-pitch-line-def">
+                        <ui:VisualElement class="ts-pitch-marker" />
+                        <ui:VisualElement class="ts-pitch-marker" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="ts-pitch-line ts-pitch-line-mid">
+                        <ui:VisualElement class="ts-pitch-marker" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="ts-pitch-line ts-pitch-line-fwd">
+                        <ui:VisualElement class="ts-pitch-marker" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+
+                <ui:VisualElement class="ts-formation-switch">
+                    <ui:Button name="btn-prev-form" class="rts-iconbtn ts-form-nav" text="&lt;" />
+                    <ui:Label name="lbl-formation" class="ts-formation-label" text="1 - 2 - 1 - 1" />
+                    <ui:Button name="btn-next-form" class="rts-iconbtn ts-form-nav" text="&gt;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- Bottom action bar -->
+        <ui:VisualElement name="bottom-bar" class="ts-bottombar">
+            <ui:Button name="btn-cancel" class="rts-btn rts-btn-ghost ts-bottom-btn" text="VOLTAR" />
+            <ui:Button name="btn-confirm" class="rts-btn ts-bottom-btn ts-confirm" text="CONFIRMAR" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

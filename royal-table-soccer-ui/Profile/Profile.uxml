@@ -1,0 +1,95 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/royal-table-soccer-ui/Theme/Theme.uss" />
+    <Style src="project://database/Assets/UI/royal-table-soccer-ui/Profile/Profile.uss" />
+
+    <ui:VisualElement name="root" class="rts-root rts-stage">
+        <ui:VisualElement class="rts-stage-overlay" />
+
+        <!-- Top bar -->
+        <ui:VisualElement class="pf-topbar">
+            <ui:Button name="btn-back" class="rts-iconbtn" text="&lt;" />
+            <ui:VisualElement class="pf-topbar-center">
+                <ui:Label class="rts-eyebrow" text="PERFIL DO JOGADOR" />
+            </ui:VisualElement>
+            <ui:VisualElement class="pf-topbar-right">
+                <ui:VisualElement class="rts-chip">
+                    <ui:Label name="lbl-rank-chip" class="rts-chip-label" text="RANK 34" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- Body: hero card on left, stats grid on right -->
+        <ui:VisualElement class="pf-body">
+
+            <!-- Hero card -->
+            <ui:VisualElement class="pf-hero rts-card">
+                <ui:VisualElement class="pf-avatar-wrap">
+                    <ui:VisualElement class="pf-avatar-glow" />
+                    <ui:VisualElement name="avatar" class="pf-avatar" />
+                    <ui:VisualElement class="pf-avatar-actions">
+                        <ui:Button name="btn-pick-photo" class="pf-icon-pill" text="GALERIA" />
+                        <ui:Button name="btn-take-photo" class="pf-icon-pill" text="CAMERA" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+
+                <ui:VisualElement class="pf-id">
+                    <ui:VisualElement class="pf-name-row">
+                        <ui:Label name="lbl-name" class="pf-name" text="MAFIAZOUK" />
+                        <ui:Label name="lbl-star" class="pf-star" text="*" />
+                    </ui:VisualElement>
+                    <ui:Label name="lbl-level" class="pf-level" text="LEVEL 1" />
+
+                    <!-- XP bar -->
+                    <ui:VisualElement class="pf-xp-row">
+                        <ui:VisualElement class="pf-xp-bar"><ui:VisualElement name="xp-fill" class="pf-xp-fill" /></ui:VisualElement>
+                        <ui:Label name="lbl-xp" class="pf-xp-text" text="0 / 1000 XP" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+            <!-- Right column: stats + badge -->
+            <ui:VisualElement class="pf-right">
+
+                <ui:VisualElement class="pf-stat-grid">
+                    <ui:VisualElement class="pf-stat-card rts-card rts-card-glass">
+                        <ui:Label class="pf-stat-eyebrow" text="ONLINE WINS" />
+                        <ui:Label name="lbl-online-wins" class="pf-stat-big" text="0" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="pf-stat-card rts-card rts-card-glass">
+                        <ui:Label class="pf-stat-eyebrow" text="STAR LEAGUE" />
+                        <ui:Label name="lbl-star-wins" class="pf-stat-big" text="0" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="pf-stat-card rts-card rts-card-glass">
+                        <ui:Label class="pf-stat-eyebrow" text="TROFEUS" />
+                        <ui:Label name="lbl-trophies" class="pf-stat-big" text="0" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="pf-stat-card rts-card rts-card-glass">
+                        <ui:Label class="pf-stat-eyebrow" text="GOLS" />
+                        <ui:Label name="lbl-goals" class="pf-stat-big" text="0" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+
+                <!-- Badge / shield slot -->
+                <ui:VisualElement class="pf-badge-card rts-card">
+                    <ui:Label class="rts-eyebrow" text="DIVISAO" />
+                    <ui:VisualElement class="pf-badge-row">
+                        <ui:VisualElement name="badge" class="pf-badge" />
+                        <ui:VisualElement class="pf-badge-text">
+                            <ui:Label name="lbl-division" class="pf-division-name" text="BRONZE I" />
+                            <ui:Label name="lbl-division-sub" class="pf-division-sub" text="Vença 3 partidas para promover" />
+                            <ui:VisualElement class="pf-promo-bar"><ui:VisualElement name="promo-fill" class="pf-promo-fill" /></ui:VisualElement>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- Bottom action bar -->
+        <ui:VisualElement class="pf-bottombar">
+            <ui:Button name="btn-edit-name" class="rts-btn" text="EDITAR NOME" />
+            <ui:Button name="btn-share" class="rts-btn" text="COMPARTILHAR" />
+        </ui:VisualElement>
+
+    </ui:VisualElement>
+</ui:UXML>
