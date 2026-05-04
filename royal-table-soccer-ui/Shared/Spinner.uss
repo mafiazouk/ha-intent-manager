@@ -1,0 +1,84 @@
+/* =========================================================
+   ROYAL TABLE SOCCER — Reusable spinner ring
+   Drop-in module: link this file from any UXML's <Style src=...>
+   and pair with UISpinner.cs on the UIDocument.
+
+   Usage in UXML:
+     <ui:VisualElement class="rts-spinner-wrap" style="width:300px; height:300px;">
+         <ui:VisualElement class="rts-spinner rts-spinner-cyan" />
+         <ui:VisualElement class="rts-spinner-content"> ...avatar/icon... </ui:VisualElement>
+     </ui:VisualElement>
+
+   Color variants: rts-spinner-cyan / -magenta / -purple / -gold / -green / -red
+   For reverse rotation, add the class: rts-spinner-reverse
+   ========================================================= */
+
+.rts-spinner-wrap {
+    align-items: center;
+    justify-content: center;
+}
+
+.rts-spinner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-top-left-radius: 999px;
+    border-top-right-radius: 999px;
+    border-bottom-left-radius: 999px;
+    border-bottom-right-radius: 999px;
+    border-left-width: 4px;
+    border-right-width: 4px;
+    border-top-width: 4px;
+    border-bottom-width: 4px;
+    rotate: 0deg;
+    transition-property: rotate;
+    transition-duration: 0ms;
+}
+
+.rts-spinner-content {
+    align-items: center;
+    justify-content: center;
+}
+
+/* ----- Color variants ----- */
+.rts-spinner-cyan {
+    border-left-color: rgba(0, 230, 255, 0.95);
+    border-right-color: rgba(0, 230, 255, 0.05);
+    border-top-color: rgba(0, 230, 255, 0.55);
+    border-bottom-color: rgba(0, 230, 255, 0.05);
+}
+
+.rts-spinner-magenta {
+    border-left-color: rgba(255, 60, 200, 0.95);
+    border-right-color: rgba(255, 60, 200, 0.05);
+    border-top-color: rgba(255, 60, 200, 0.55);
+    border-bottom-color: rgba(255, 60, 200, 0.05);
+}
+
+.rts-spinner-purple {
+    border-left-color: rgba(170, 90, 255, 0.95);
+    border-right-color: rgba(170, 90, 255, 0.05);
+    border-top-color: rgba(170, 90, 255, 0.55);
+    border-bottom-color: rgba(170, 90, 255, 0.05);
+}
+
+.rts-spinner-gold {
+    border-left-color: rgba(255, 184, 0, 0.95);
+    border-right-color: rgba(255, 184, 0, 0.05);
+    border-top-color: rgba(255, 184, 0, 0.55);
+    border-bottom-color: rgba(255, 184, 0, 0.05);
+}
+
+.rts-spinner-green {
+    border-left-color: rgba(80, 255, 160, 0.95);
+    border-right-color: rgba(80, 255, 160, 0.05);
+    border-top-color: rgba(80, 255, 160, 0.55);
+    border-bottom-color: rgba(80, 255, 160, 0.05);
+}
+
+.rts-spinner-red {
+    border-left-color: rgba(255, 70, 90, 0.95);
+    border-right-color: rgba(255, 70, 90, 0.05);
+    border-top-color: rgba(255, 70, 90, 0.55);
+    border-bottom-color: rgba(255, 70, 90, 0.05);
+}
