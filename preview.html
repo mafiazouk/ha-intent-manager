@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Royal Table Soccer — UI Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+<style>
+  /* ---------- tokens (espelham Theme.uss) ---------- */
+  :root{
+    --bg-deep:#040816; --bg-card:rgba(20,36,96,.85); --bg-glass:rgba(20,36,96,.55);
+    --stroke:rgba(140,110,255,.85); --stroke-soft:rgba(140,110,255,.35);
+    --royal:#1C38B4; --royal-hi:#3860F0;
+    --cyan:#00E6FF; --magenta:#FF3CC8; --purple:#AA5AFF; --green:#50FFA0;
+    --gold:#FFC83C; --danger:#FF465A;
+    --text:#fff; --text-dim:rgba(220,230,255,.65);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'Lilita One',system-ui,sans-serif;letter-spacing:1px}
+  html,body{background:#000;color:var(--text);min-height:100vh;overflow-x:hidden}
+  body{display:flex;flex-direction:column;align-items:center}
+
+  /* ---------- header / tabs ---------- */
+  header{
+    position:sticky;top:0;z-index:10;width:100%;background:linear-gradient(#040816,#0a0f24);
+    border-bottom:1px solid var(--stroke-soft);padding:10px 12px;
+    display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center
+  }
+  header h1{font-size:14px;color:var(--cyan);letter-spacing:3px;flex-basis:100%;text-align:center;margin-bottom:6px}
+  .tab{
+    background:var(--bg-card);color:#fff;border:2px solid var(--purple);border-radius:999px;
+    padding:8px 16px;font-size:13px;letter-spacing:2px;cursor:pointer;transition:.15s
+  }
+  .tab.active{background:var(--royal-hi);border-color:var(--cyan);box-shadow:0 0 18px rgba(0,230,255,.4)}
+  .hint{font-size:11px;color:var(--text-dim);text-align:center;flex-basis:100%;margin-top:4px}
+
+  /* ---------- scaled stage ---------- */
+  .viewport{
+    width:100vw;
+    aspect-ratio:16/9;
+    overflow:hidden;
+    position:relative;
+    margin-top:8px;
+    border-top:1px solid var(--stroke-soft);
+    border-bottom:1px solid var(--stroke-soft);
+  }
+  .stage{
+    width:1920px;height:1080px;
+    position:absolute;top:0;left:0;
+    transform-origin:top left;
+    /* scale set via JS to fit viewport width */
+  }
+
+  /* ---------- shared scene background ---------- */
+  .scene{
+    position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(255,255,255,.08), transparent 60%),
+      radial-gradient(ellipse at 20% 80%, rgba(0,230,255,.08), transparent 60%),
+      radial-gradient(ellipse at 80% 80%, rgba(255,60,200,.08), transparent 60%),
+      linear-gradient(#04070f,#0a1230 60%,#04070f);
+  }
+  .scene::after{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse at 30% 110%, rgba(36,110,60,.45), transparent 55%),
+      radial-gradient(ellipse at 70% 110%, rgba(36,110,60,.45), transparent 55%);
+    pointer-events:none;
+  }
+
+  /* ---------- common widgets ---------- */
+  .card{
+    background:var(--bg-card);border:2px solid var(--stroke);border-radius:28px;padding:32px;
+    box-shadow:0 0 40px rgba(170,90,255,.15) inset, 0 0 30px rgba(170,90,255,.2);
+  }
+  .card.glass{background:var(--bg-glass);border-color:var(--stroke-soft)}
+  .eyebrow{font-size:22px;color:var(--cyan);letter-spacing:6px;text-align:center}
+  .iconbtn{
+    width:80px;height:80px;border-radius:999px;background:var(--bg-card);
+    border:2px solid var(--stroke);color:#fff;font-size:44px;display:flex;align-items:center;justify-content:center
+  }
+  .pill{
+    height:72px;min-width:200px;padding:0 32px;background:var(--royal);color:#fff;
+    border:2px solid var(--purple);border-radius:999px;font-size:30px;letter-spacing:2px;
+    display:inline-flex;align-items:center;justify-content:center;
+    box-shadow:0 0 24px rgba(170,90,255,.35)
+  }
+  .pill.cyan{border-color:var(--cyan);box-shadow:0 0 24px rgba(0,230,255,.45)}
+  .pill.danger{background:rgba(60,8,18,.85);border-color:var(--danger);color:var(--danger);box-shadow:0 0 24px rgba(255,70,90,.45)}
+  .chip{
+    height:56px;padding:0 24px;background:rgba(8,16,40,.7);border:1px solid var(--stroke-soft);
+    border-radius:999px;display:inline-flex;align-items:center;font-size:22px
+  }
+
+  /* ---------- scenes layout ---------- */
+  .scenes>section{display:none}
+  .scenes>section.active{display:block}
+
+  /* ---- TeamSelect ---- */
+  .ts-top{position:absolute;top:24px;left:32px;right:32px;height:96px;display:flex;align-items:center;justify-content:space-between}
+  .ts-body{position:absolute;top:140px;left:60px;right:60px;bottom:140px;display:flex;gap:24px}
+  .ts-team{flex:1.4;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:48px}
+  .ts-name{font-size:72px;letter-spacing:6px}
+  .ts-carousel{display:flex;align-items:center;gap:32px;margin:24px 0}
+  .crest-wrap{width:360px;height:360px;display:flex;align-items:center;justify-content:center;position:relative}
+  .crest-glow{position:absolute;width:380px;height:380px;border-radius:999px;background:rgba(170,90,255,.18);border:4px solid rgba(0,230,255,.55);box-shadow:0 0 60px rgba(0,230,255,.35)}
+  .crest{width:300px;height:300px;border-radius:999px;background:
+    conic-gradient(from 0deg, #c81e2c 0 25%, #1746a6 0 50%, #c81e2c 0 75%, #1746a6 0 100%);
+    display:flex;align-items:center;justify-content:center;color:#fff;font-size:36px;text-shadow:0 2px 4px rgba(0,0,0,.6);
+    box-shadow:inset 0 0 40px rgba(0,0,0,.4)}
+  .stats{width:80%;display:flex;flex-direction:column;gap:10px;margin-top:16px}
+  .stat{display:flex;align-items:center;gap:12px}
+  .stat-lbl{width:140px;font-size:22px;color:rgba(220,230,255,.85);letter-spacing:3px}
+  .bar{flex:1;height:18px;background:rgba(8,16,40,.85);border:1px solid rgba(140,110,255,.45);border-radius:999px;overflow:hidden}
+  .bar>span{display:block;height:100%;border-radius:999px}
+  .bar.atk>span{background:var(--magenta);width:84%}
+  .bar.mid>span{background:var(--purple);width:78%}
+  .bar.def>span{background:var(--cyan);width:80%}
+  .stat-val{width:80px;font-size:28px;text-align:right}
+  .ts-form{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:48px}
+  .pitch{width:88%;height:460px;margin-top:16px;background:
+    linear-gradient(180deg, rgba(0,0,0,.2), rgba(0,0,0,0)),
+    repeating-linear-gradient(90deg, #246e3c 0 80px, #2b7e44 80px 160px);
+    border:3px solid rgba(255,255,255,.6);border-radius:16px;
+    display:flex;flex-direction:column;justify-content:space-around;padding:24px;position:relative}
+  .pitch::before{content:"";position:absolute;left:50%;top:24px;bottom:24px;width:2px;background:rgba(255,255,255,.4);transform:translateX(-50%)}
+  .pitch::after{content:"";position:absolute;left:50%;top:50%;width:120px;height:120px;border:2px solid rgba(255,255,255,.4);border-radius:999px;transform:translate(-50%,-50%)}
+  .line{display:flex;justify-content:space-around;align-items:center;height:80px;position:relative}
+  .marker{width:56px;height:56px;border-radius:999px;background:radial-gradient(circle at 30% 30%,#9d4dff,#23035c);box-shadow:0 0 12px rgba(170,90,255,.7)}
+  .form-switch{display:flex;align-items:center;gap:16px;margin-top:24px}
+  .form-lbl{font-size:44px;letter-spacing:8px;min-width:280px;text-align:center}
+  .form-nav{width:64px;height:64px;font-size:28px}
+  .ts-bottom{position:absolute;bottom:32px;left:0;right:0;display:flex;justify-content:center;gap:48px}
+  .ts-bottom .pill{min-width:320px;height:84px;font-size:36px}
+
+  /* ---- Profile ---- */
+  .pf-top{position:absolute;top:24px;left:32px;right:32px;height:96px;display:flex;align-items:center;justify-content:space-between}
+  .pf-body{position:absolute;top:140px;left:60px;right:60px;bottom:140px;display:flex;gap:24px}
+  .pf-hero{flex:1;display:flex;flex-direction:column;align-items:center;padding:48px}
+  .avatar-wrap{width:360px;height:360px;display:flex;align-items:center;justify-content:center;position:relative}
+  .avatar-glow{position:absolute;width:380px;height:380px;border-radius:999px;background:rgba(0,230,255,.18);border:4px solid rgba(170,90,255,.85);box-shadow:0 0 60px rgba(170,90,255,.4)}
+  .avatar{width:320px;height:320px;border-radius:999px;background:
+    radial-gradient(circle at 35% 30%,#c4a07a,#704a30 60%,#3a2a1a);
+    display:flex;align-items:flex-end;justify-content:center;color:#fff;font-size:24px;padding-bottom:20px;
+    box-shadow:inset 0 -40px 60px rgba(0,0,0,.4)}
+  .avatar-actions{position:absolute;bottom:-16px;display:flex;gap:8px}
+  .icon-pill{height:56px;min-width:140px;padding:0 18px;background:rgba(8,16,40,.92);border:2px solid var(--cyan);border-radius:999px;font-size:22px;letter-spacing:3px;color:#fff;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 0 18px rgba(0,230,255,.35)}
+  .pf-id{margin-top:56px;display:flex;flex-direction:column;align-items:center}
+  .pf-name{font-size:64px;color:var(--gold);letter-spacing:6px;text-shadow:0 0 20px rgba(255,200,60,.4)}
+  .pf-name .star{margin-left:16px}
+  .pf-level{margin-top:8px;font-size:32px;color:rgba(220,230,255,.85);letter-spacing:6px}
+  .xp-row{margin-top:24px;width:80%;display:flex;flex-direction:column;align-items:center}
+  .xp-bar{width:100%;height:22px;background:rgba(8,16,40,.85);border:1px solid rgba(140,110,255,.45);border-radius:999px;overflow:hidden}
+  .xp-bar>span{display:block;width:12%;height:100%;background:var(--green);border-radius:999px;box-shadow:0 0 12px rgba(80,255,160,.6)}
+  .xp-text{margin-top:8px;font-size:22px;color:rgba(220,230,255,.85);letter-spacing:3px}
+  .pf-right{flex:1.2;display:flex;flex-direction:column;justify-content:space-between;gap:16px}
+  .pf-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .pf-stat{padding:24px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .pf-stat-eyebrow{font-size:22px;color:var(--cyan);letter-spacing:6px}
+  .pf-stat-big{font-size:88px;letter-spacing:4px;margin-top:4px}
+  .pf-badge{padding:24px;display:flex;flex-direction:column}
+  .pf-badge-row{display:flex;align-items:center;gap:24px;margin-top:12px}
+  .badge{width:140px;height:160px;background:
+    linear-gradient(135deg,#8b5a2b,#3a2410);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);
+    display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:24px}
+  .division{font-size:44px;color:var(--gold);letter-spacing:6px}
+  .division-sub{margin-top:4px;font-size:22px;color:rgba(220,230,255,.75)}
+  .promo-bar{margin-top:12px;width:100%;height:14px;background:rgba(8,16,40,.85);border-radius:999px;overflow:hidden}
+  .promo-bar>span{display:block;width:33%;height:100%;background:var(--gold)}
+  .pf-bottom{position:absolute;bottom:32px;left:0;right:0;display:flex;justify-content:center;gap:48px}
+  .pf-bottom .pill{min-width:320px;height:80px;font-size:32px}
+
+  /* ---- Matchmaking ---- */
+  .mm-header{position:absolute;top:48px;left:0;right:0;display:flex;flex-direction:column;align-items:center;gap:8px}
+  .mm-title{font-size:56px;letter-spacing:8px}
+  .mm-timer{font-size:96px;color:var(--cyan);letter-spacing:12px;text-shadow:0 0 30px rgba(0,230,255,.5)}
+  .mm-arena{position:absolute;top:340px;left:0;right:0;display:flex;align-items:center;justify-content:center;gap:32px}
+  .mm-side{width:32%;display:flex;flex-direction:column;align-items:center}
+  .portrait-wrap{width:360px;height:360px;display:flex;align-items:center;justify-content:center;position:relative}
+  .portrait-frame{width:320px;height:320px;border-radius:999px;border:4px solid;background:rgba(8,16,40,.92);overflow:hidden;display:flex;align-items:center;justify-content:center}
+  .mm-side.left .portrait-frame{border-color:var(--cyan);box-shadow:0 0 40px rgba(0,230,255,.5)}
+  .mm-side.right .portrait-frame{border-color:var(--danger);box-shadow:0 0 40px rgba(255,70,90,.5)}
+  .portrait-img{width:100%;height:100%;background:radial-gradient(circle at 35% 30%,#c4a07a,#704a30 60%,#3a2a1a)}
+  .portrait-unknown{width:100%;height:100%;background:rgba(20,36,96,.85);display:flex;align-items:center;justify-content:center;font-size:180px;color:rgba(220,230,255,.55)}
+  .spinner{position:absolute;width:360px;height:360px;border-radius:999px;border:4px solid transparent;animation:spin 2.4s linear infinite}
+  .mm-side.left .spinner{border-top-color:var(--cyan);border-right-color:var(--cyan);border-bottom-color:rgba(0,230,255,.1);border-left-color:rgba(0,230,255,.1)}
+  .mm-side.right .spinner{animation-direction:reverse;border-top-color:var(--danger);border-right-color:var(--danger);border-bottom-color:rgba(255,70,90,.1);border-left-color:rgba(255,70,90,.1)}
+  @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+  .mm-name{margin-top:24px;font-size:56px;letter-spacing:6px}
+  .mm-side.left .mm-name{color:var(--cyan)}
+  .mm-side.right .mm-name{color:var(--danger)}
+  .mm-meta{margin-top:4px;font-size:26px;color:rgba(220,230,255,.75);letter-spacing:4px}
+  .mm-vs{width:220px;height:220px;display:flex;align-items:center;justify-content:center;font-size:180px;text-shadow:0 0 30px rgba(255,60,200,.5)}
+  .mm-footer{position:absolute;bottom:32px;left:0;right:0;display:flex;flex-direction:column;align-items:center;gap:12px}
+  .fairplay{font-size:26px;color:rgba(220,230,255,.85);letter-spacing:6px}
+  .tip-row{display:flex;align-items:center;gap:12px}
+  .tip-dot{width:12px;height:12px;border-radius:999px;background:var(--cyan);box-shadow:0 0 10px var(--cyan)}
+  .tip{font-size:22px;color:rgba(220,230,255,.65);letter-spacing:3px}
+  .mm-cancel{margin-top:12px;min-width:360px;height:80px;font-size:32px}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>ROYAL TABLE SOCCER — UI PREVIEW (Stadium Night)</h1>
+  <button class="tab active" data-target="ts">Selecao de Time</button>
+  <button class="tab" data-target="pf">Profile</button>
+  <button class="tab" data-target="mm">Matchmaking</button>
+  <div class="hint">Vire o celular na horizontal para melhor visualizacao</div>
+</header>
+
+<div class="viewport">
+  <div class="stage scenes">
+
+    <!-- ============ TEAM SELECT ============ -->
+    <section id="ts" class="scene active">
+      <div class="ts-top">
+        <div class="iconbtn">&lt;</div>
+        <div style="text-align:center">
+          <div class="eyebrow">CAMPEONATO</div>
+          <div style="font-size:30px;color:var(--text-dim);letter-spacing:2px;margin-top:4px">ESCOLHA SEU TIME</div>
+        </div>
+        <div class="chip">LIGA: PRIMERA</div>
+      </div>
+
+      <div class="ts-body">
+        <div class="ts-team card">
+          <div class="ts-name">ARSENAL SARANDI</div>
+          <div class="ts-carousel">
+            <div class="iconbtn">&lt;</div>
+            <div class="crest-wrap">
+              <div class="crest-glow"></div>
+              <div class="crest">ARSENAL</div>
+            </div>
+            <div class="iconbtn">&gt;</div>
+          </div>
+          <div class="stats">
+            <div class="stat"><div class="stat-lbl">ATAQUE</div><div class="bar atk"><span></span></div><div class="stat-val">84</div></div>
+            <div class="stat"><div class="stat-lbl">MEIO</div><div class="bar mid"><span></span></div><div class="stat-val">78</div></div>
+            <div class="stat"><div class="stat-lbl">DEFESA</div><div class="bar def"><span></span></div><div class="stat-val">80</div></div>
+          </div>
+        </div>
+
+        <div class="ts-form card glass">
+          <div class="eyebrow">FORMACAO</div>
+          <div class="pitch">
+            <div class="line"><div class="marker"></div></div>
+            <div class="line"><div class="marker"></div><div class="marker"></div></div>
+            <div class="line"><div class="marker"></div></div>
+            <div class="line"><div class="marker"></div></div>
+          </div>
+          <div class="form-switch">
+            <div class="iconbtn form-nav">&lt;</div>
+            <div class="form-lbl">1 - 2 - 1 - 1</div>
+            <div class="iconbtn form-nav">&gt;</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ts-bottom">
+        <div class="pill" style="background:transparent">VOLTAR</div>
+        <div class="pill cyan">CONFIRMAR</div>
+      </div>
+    </section>
+
+    <!-- ============ PROFILE ============ -->
+    <section id="pf" class="scene">
+      <div class="pf-top">
+        <div class="iconbtn">&lt;</div>
+        <div class="eyebrow">PERFIL DO JOGADOR</div>
+        <div class="chip">RANK 34</div>
+      </div>
+
+      <div class="pf-body">
+        <div class="pf-hero card">
+          <div class="avatar-wrap">
+            <div class="avatar-glow"></div>
+            <div class="avatar"></div>
+            <div class="avatar-actions">
+              <div class="icon-pill">GALERIA</div>
+              <div class="icon-pill">CAMERA</div>
+            </div>
+          </div>
+          <div class="pf-id">
+            <div class="pf-name">MAFIAZOUK <span class="star">&#9733;</span></div>
+            <div class="pf-level">LEVEL 1</div>
+            <div class="xp-row">
+              <div class="xp-bar"><span></span></div>
+              <div class="xp-text">120 / 1000 XP</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pf-right">
+          <div class="pf-grid">
+            <div class="pf-stat card glass"><div class="pf-stat-eyebrow">ONLINE WINS</div><div class="pf-stat-big">0</div></div>
+            <div class="pf-stat card glass"><div class="pf-stat-eyebrow">STAR LEAGUE</div><div class="pf-stat-big">0</div></div>
+            <div class="pf-stat card glass"><div class="pf-stat-eyebrow">TROFEUS</div><div class="pf-stat-big">3</div></div>
+            <div class="pf-stat card glass"><div class="pf-stat-eyebrow">GOLS</div><div class="pf-stat-big">12</div></div>
+          </div>
+          <div class="pf-badge card">
+            <div class="eyebrow" style="text-align:left">DIVISAO</div>
+            <div class="pf-badge-row">
+              <div class="badge">RTS</div>
+              <div style="flex:1">
+                <div class="division">BRONZE I</div>
+                <div class="division-sub">Vença 3 partidas para promover</div>
+                <div class="promo-bar"><span></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pf-bottom">
+        <div class="pill">EDITAR NOME</div>
+        <div class="pill cyan">COMPARTILHAR</div>
+      </div>
+    </section>
+
+    <!-- ============ MATCHMAKING ============ -->
+    <section id="mm" class="scene">
+      <div class="mm-header">
+        <div class="eyebrow">MATCHMAKING</div>
+        <div class="mm-title">BUSCANDO ADVERSARIO REAL</div>
+        <div class="mm-timer" id="mmTimer">00 : 28</div>
+      </div>
+
+      <div class="mm-arena">
+        <div class="mm-side left">
+          <div class="portrait-wrap">
+            <div class="spinner"></div>
+            <div class="portrait-frame"><div class="portrait-img"></div></div>
+          </div>
+          <div class="mm-name">MAFIAZOUK</div>
+          <div class="mm-meta">LV 1 &middot; RANK 34</div>
+        </div>
+
+        <div class="mm-vs">VS</div>
+
+        <div class="mm-side right">
+          <div class="portrait-wrap">
+            <div class="spinner"></div>
+            <div class="portrait-frame"><div class="portrait-unknown">?</div></div>
+          </div>
+          <div class="mm-name">PROCURANDO...</div>
+          <div class="mm-meta">&mdash;</div>
+        </div>
+      </div>
+
+      <div class="mm-footer">
+        <div class="fairplay">RESPEITE O ADVERSARIO NA PARTIDA ONLINE</div>
+        <div class="tip-row">
+          <div class="tip-dot"></div>
+          <div class="tip" id="mmTip">DICA: ABASTECA SEU TIME ANTES DAS PARTIDAS RANKEADAS</div>
+        </div>
+        <div class="pill danger mm-cancel">CANCELAR BUSCA</div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script>
+  // tab switching
+  document.querySelectorAll('.tab').forEach(t=>{
+    t.addEventListener('click',()=>{
+      document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+      document.querySelectorAll('.scene').forEach(x=>x.classList.remove('active'));
+      t.classList.add('active');
+      document.getElementById(t.dataset.target).classList.add('active');
+    });
+  });
+
+  // scale 1920x1080 stage to viewport width
+  function fit(){
+    const vp = document.querySelector('.viewport');
+    const stage = document.querySelector('.stage');
+    const scale = vp.clientWidth / 1920;
+    stage.style.transform = `scale(${scale})`;
+  }
+  window.addEventListener('resize', fit);
+  window.addEventListener('orientationchange', ()=>setTimeout(fit,200));
+  fit();
+
+  // matchmaking timer + tips
+  let sec = 28;
+  setInterval(()=>{
+    sec++;
+    const mm = String(Math.floor(sec/60)).padStart(2,'0');
+    const ss = String(sec%60).padStart(2,'0');
+    document.getElementById('mmTimer').textContent = `${mm} : ${ss}`;
+  },1000);
+
+  const tips = [
+    "DICA: ABASTECA SEU TIME ANTES DAS PARTIDAS RANKEADAS",
+    "DICA: FORMACAO 1-1-2-1 AUMENTA SEU PODER OFENSIVO",
+    "DICA: VITORIAS CONSECUTIVAS DOBRAM SEUS PONTOS",
+    "DICA: COMPLETE OBJETIVOS DIARIOS PARA GANHAR DIAMANTES"
+  ];
+  let ti = 0;
+  setInterval(()=>{ ti=(ti+1)%tips.length; document.getElementById('mmTip').textContent = tips[ti]; },4000);
+</script>
+</body>
+</html>
